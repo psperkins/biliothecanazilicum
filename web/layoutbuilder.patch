@@ -1,0 +1,24 @@
+diff --git a/core/lib/Drupal/Component/Utility/Unicode.php b/core/lib/Drupal/Component/Utility/Unicode.php
+index 1234567..abcdefg 100644
+--- a/core/lib/Drupal/Component/Utility/Unicode.php
++++ b/core/lib/Drupal/Component/Utility/Unicode.php
+@@ -392,6 +392,19 @@
+    *   TRUE if the text is valid UTF-8, FALSE if not.
+    */
+   public static function validateUtf8($text) {
++    // Fix TypeError: strlen(): Argument #1 ($string) must be of type string, array given
++    if (!is_string($text)) {
++      if (is_array($text)) {
++        // Handle render arrays from BigPipe/Messenger
++        if (isset($text['#markup'])) {
++          $text = (string) $text['#markup'];
++        } else {
++          return FALSE;
++        }
++      } else {
++        $text = (string) $text;
++      }
++    }
+     if (strlen($text) == 0) {
+       return TRUE;
+     }

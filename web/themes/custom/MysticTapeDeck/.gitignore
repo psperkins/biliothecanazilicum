@@ -1,0 +1,17 @@
+# Ignore SASS files
+/.sass-cache
+.DS_Store
+*.codekit
+.idea
+.vscode
+node_modules
+
+# local env files
+.env.local
+.env.test.local
+
+# manifest
+mix-manifest.json
+
+# Bootstrap Icons SVGs copied from node_modules by the webpack build
+/assets/icons/bootstrap-icons

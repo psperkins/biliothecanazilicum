@@ -1,0 +1,26 @@
+name: MysticTapeDeck
+description: "MysticTapeDeck theme based on <a href='https://www.drupal.org/project/radix' target='_blank'>Radix 6.x</a> and Bootstrap 5.x"
+screenshot: screenshot.png
+'alt text': 'MysticTapeDeck theme screenshot'
+core_version_requirement: ^11
+engine: twig
+type: theme
+'base theme': radix
+'interface translation project': MysticTapeDeck
+'interface translation server pattern': themes/custom/MysticTapeDeck/translations/%language.po
+regions:
+  navbar_branding: 'Navbar branding'
+  navbar_left: 'Navbar left'
+  navbar_right: 'Navbar right'
+  header: Header
+  content: Content
+  page_bottom: 'Page bottom'
+  footer: Footer
+libraries:
+  - MysticTapeDeck/style
+ckeditor5-stylesheets:
+  - build/css/main.style.css
+version: 6.0.3
+project: radix
+datestamp: 1779371369
+generator: 'radix_starterkit:6.0.3'

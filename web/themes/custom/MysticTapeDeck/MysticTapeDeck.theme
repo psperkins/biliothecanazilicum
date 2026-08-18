@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Theme functions.
+ */
+
+// Include all files from the includes directory.
+$includes_path = __DIR__ . '/includes/*.theme';
+foreach (glob($includes_path) as $file) {
+  require_once __DIR__ . '/includes/' . basename($file);
+}
+
+function MysticTapeDeck_preprocess_block(&$variables) {
+  if (isset($variables['elements']['content']['#block_content'])) {
+    $variables['block_content'] = $variables['elements']['content']['#block_content'];
+  }
+}

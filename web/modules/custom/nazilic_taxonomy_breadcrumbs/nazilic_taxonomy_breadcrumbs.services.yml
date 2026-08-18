@@ -1,0 +1,7 @@
+services:
+  nazilic_taxonomy_breadcrumbs.breadcrumb_term:
+    class: Drupal\nazilic_taxonomy_breadcrumbs\Breadcrumb\TermBreadcrumbBuilder
+    arguments: ['@request_stack', '@entity_type.manager']
+    tags:
+      # Priority 1003 overrides the core TermBreadcrumbBuilder (1002)
+      - { name: breadcrumb_builder, priority: 1003 }

@@ -1,0 +1,48 @@
+.navbar-brand__logo {
+  padding-right: 1.5rem;
+}
+
+.views-view-responsive-grid__item {
+  padding: 2rem;
+  border: 1px solid #bbb;
+}
+
+.field--name-field-bandcamp-product {
+  .field--name-label {
+    display: none;
+  }
+}
+
+blockquote {
+  padding-left:2em;
+  border-left: 3px solid $info;
+  background-color: $light;
+}
+
+.field--name-field-addendums {
+  padding-right: 2em;
+}
+
+.field--name-field-attribution {
+  color: $secondary;
+  font-style: italic;
+  padding: 1rem 2rem;
+}
+.field--name-field-media-image {
+  margin-top:3rem;
+}
+
+.imagelightbox-caption {
+  color: whitesmoke;
+  font-size: .8rem;
+  font-weight: bold;
+  width: auto;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.4);
+}

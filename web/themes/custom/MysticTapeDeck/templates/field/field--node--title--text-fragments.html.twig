@@ -1,0 +1,11 @@
+
+
+{% if not is_inline %}
+{% include "field.html.twig" %}
+{% else %}
+<h2{{ attributes }}>
+{%- for item in items -%}
+{{ item.content }}
+{%- endfor -%}
+</h2>
+{% endif %}
