@@ -46,3 +46,10 @@ blockquote {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   background: rgba(0,0,0,0.4);
 }
+
+/* Hide mobile menu toggle and container */
+.navbar-toggler,
+#main-menu,
+.menu-container {
+  display: none !important;
+}
