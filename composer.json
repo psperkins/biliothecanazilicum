@@ -40,6 +40,8 @@
         "drupal/feeds_ex": "^1.0@beta",
         "drupal/feeds_tamper": "^2.0@RC",
         "drupal/field_group": "^4.0",
+        "drupal/field_tokens": "^2.0",
+        "drupal/google_analytics": "^4.0",
         "drupal/haven": "^1",
         "drupal/imagelightbox": "^2.2",
         "drupal/layout_builder_block_headings": "^1.0",
