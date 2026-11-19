@@ -1,0 +1,11 @@
+uuid: 37ebea14-f167-4817-a04b-f929749a639a
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.product_embed
+label: 'Product Embed'
+description: null
+targetEntityType: taxonomy_term
+cache: true

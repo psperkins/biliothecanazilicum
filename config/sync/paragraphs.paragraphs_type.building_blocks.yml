@@ -1,0 +1,10 @@
+uuid: 3d21364c-5714-4a5c-9c2d-35f73181c6e6
+langcode: en
+status: true
+dependencies: {  }
+id: building_blocks
+label: 'Building Blocks'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

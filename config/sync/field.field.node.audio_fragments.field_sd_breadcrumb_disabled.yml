@@ -1,0 +1,23 @@
+uuid: 256ea1a7-f181-44dd-90ea-48a8b589f23a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_disabled
+    - node.type.audio_fragments
+id: node.audio_fragments.field_sd_breadcrumb_disabled
+field_name: field_sd_breadcrumb_disabled
+entity_type: node
+bundle: audio_fragments
+label: 'Breadcrumb Disabled'
+description: 'When checked, breadcrumbs will not be displayed for this node.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

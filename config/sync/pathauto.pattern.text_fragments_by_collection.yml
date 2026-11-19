@@ -1,0 +1,23 @@
+uuid: c76aabf2-303b-4550-ae7f-5a2167d221f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.text_fragments
+  module:
+    - node
+id: text_fragments_by_collection
+label: 'Text Fragments By Collection'
+type: 'canonical_entities:node'
+pattern: '/[node:field_collection]/[node:title]'
+selection_criteria:
+  a1527c88-5560-44ce-b374-1c0004bba6f8:
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      text_fragments: text_fragments
+selection_logic: and
+weight: -5
+relationships: {  }

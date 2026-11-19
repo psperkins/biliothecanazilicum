@@ -1,0 +1,23 @@
+uuid: 5e41bbdf-98f3-41d1-a828-8eca84c0fbdc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_automatic
+    - node.type.text_fragments
+id: node.text_fragments.field_sd_breadcrumb_automatic
+field_name: field_sd_breadcrumb_automatic
+entity_type: node
+bundle: text_fragments
+label: 'Use Automatic Breadcrumbs'
+description: 'When checked, use content type breadcrumb pattern. Uncheck to customize for this node.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

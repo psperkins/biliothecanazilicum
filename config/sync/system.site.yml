@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: HlN7eAN2N4JIHsYv56V4E7sqC9bS609KwvGFjyD_mgk
+langcode: en
+uuid: 849a96e4-c314-4009-b24a-fa56d2e0e1b2
+name: 'THE NAZILIC DEPARTMENT OF UNVERIFIED HISTORIES & ESOTERIC INQUIRY'
+mail: mystictapedeck@gmail.com
+slogan: 'Maintained for the Preservation of Curious Records and Eldritch Oddities'
+page:
+  403: /user/login
+  404: ''
+  front: /node/2
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
+mail_notification: null

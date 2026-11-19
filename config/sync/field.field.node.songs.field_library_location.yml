@@ -1,0 +1,29 @@
+uuid: f16f4cfd-b542-49ce-b0b2-e43d87a3da68
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_library_location
+    - node.type.songs
+    - taxonomy.vocabulary.architectural
+id: node.songs.field_library_location
+field_name: field_library_location
+entity_type: node
+bundle: songs
+label: 'Library Location: '
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      architectural: architectural
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

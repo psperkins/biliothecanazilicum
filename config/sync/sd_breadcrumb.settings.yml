@@ -1,0 +1,17 @@
+_core:
+  default_config_hash: MjkXXCp-CSc8zbM9ZGEG3JiY8ynrtytvDtSD3EbGj2c
+applies_to_admin_pages: true
+include_invalid_paths_as_plain_text_segments: true
+include_current_page_as_segment: true
+remove_repeated_identical_segments: true
+include_front_page_as_segment: true
+use_real_page_title_when_available: false
+alternative_title_field: field_section_title
+front_page_segment_title: Home
+front_page_icon: null
+capitalize_first_letter: false
+words_to_ignore: 'of and or de la'
+cache_enabled: false
+cache_max_age: 3600
+log_errors: false
+log_generation: false

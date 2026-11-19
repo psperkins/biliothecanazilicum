@@ -1,0 +1,19 @@
+uuid: 966ac438-98a3-47e0-a170-2ac6a4c733fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subtitle
+    - node.type.text_fragments
+id: node.text_fragments.field_subtitle
+field_name: field_subtitle
+entity_type: node
+bundle: text_fragments
+label: Subtitle
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

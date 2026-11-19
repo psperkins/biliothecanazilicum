@@ -1,0 +1,10 @@
+uuid: 400f27a9-b8d9-4bf1-a25b-cbab4e4f1567
+langcode: en
+status: true
+dependencies: {  }
+id: large_inline_image
+label: 'Large Inline Image'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

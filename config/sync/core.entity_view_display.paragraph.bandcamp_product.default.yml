@@ -1,0 +1,216 @@
+uuid: 7704a589-1934-4a8a-8de6-5b93b6d5f328
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.bandcamp_product.field_product_pitch
+    - field.field.paragraph.bandcamp_product.field_product_url
+    - field.field.paragraph.bandcamp_product.field_vessel
+    - field.field.paragraph.bandcamp_product.field_year_of_release
+    - field.field.paragraph.bandcamp_product.layout_builder__layout
+    - paragraphs.paragraphs_type.bandcamp_product
+  module:
+    - layout_builder
+    - layout_discovery
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          f4cf1d45-738b-456f-ad3b-29f6ba2c9bcb:
+            uuid: f4cf1d45-738b-456f-ad3b-29f6ba2c9bcb
+            region: content
+            configuration:
+              id: 'field_block:paragraph:bandcamp_product:field_vessel'
+              label: Vessel
+              label_display: ''
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: product_embed
+                third_party_settings: {  }
+            weight: 0
+            additional:
+              bootstrap_styles:
+                block_style:
+                  background:
+                    background_type: null
+                  background_color:
+                    class: null
+                  background_media:
+                    image:
+                      media_id: null
+                    video:
+                      media_id: null
+                    background_options:
+                      background_position: center
+                      background_repeat: no-repeat
+                      background_attachment: not_fixed
+                      background_size: cover
+                  text_color:
+                    class: null
+                  text_alignment:
+                    class: null
+                  padding:
+                    class: _none
+                  padding_left:
+                    class: _none
+                  padding_top:
+                    class: _none
+                  padding_right:
+                    class: _none
+                  padding_bottom:
+                    class: _none
+                  margin:
+                    class: _none
+                  margin_left:
+                    class: _none
+                  margin_top:
+                    class: _none
+                  margin_right:
+                    class: _none
+                  margin_bottom:
+                    class: _none
+                  border:
+                    border_style:
+                      class: null
+                    border_width:
+                      class: _none
+                    border_color:
+                      class: null
+                    rounded_corners:
+                      class: _none
+                    border_left_style:
+                      class: null
+                    border_left_width:
+                      class: _none
+                    border_left_color:
+                      class: null
+                    border_top_style:
+                      class: null
+                    border_top_width:
+                      class: _none
+                    border_top_color:
+                      class: null
+                    border_right_style:
+                      class: null
+                    border_right_width:
+                      class: _none
+                    border_right_color:
+                      class: null
+                    border_bottom_style:
+                      class: null
+                    border_bottom_width:
+                      class: _none
+                    border_bottom_color:
+                      class: null
+                    rounded_corner_top_left:
+                      class: _none
+                    rounded_corner_top_right:
+                      class: _none
+                    rounded_corner_bottom_left:
+                      class: _none
+                    rounded_corner_bottom_right:
+                      class: _none
+                  box_shadow:
+                    class: null
+                  scroll_effects:
+                    class: null
+          b929bdb7-0589-4087-a336-c9e44b41a893:
+            uuid: b929bdb7-0589-4087-a336-c9e44b41a893
+            region: content
+            configuration:
+              id: 'field_block:paragraph:bandcamp_product:field_product_url'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: link
+                label: above
+                settings:
+                  trim_length: 80
+                  url_only: false
+                  url_plain: false
+                  rel: ''
+                  target: ''
+                third_party_settings: {  }
+            weight: 2
+            additional:
+              component_attributes:
+                block_attributes:
+                  id: ''
+                  class: 'btn btn-primary p-2'
+                  style: ''
+                  data: ''
+                block_title_attributes:
+                  id: ''
+                  class: ''
+                  style: ''
+                  data: ''
+                block_content_attributes:
+                  id: ''
+                  class: ''
+                  style: ''
+                  data: ''
+          cc98ad2b-5159-4bcd-a986-a426dbe0e9c4:
+            uuid: cc98ad2b-5159-4bcd-a986-a426dbe0e9c4
+            region: content
+            configuration:
+              id: 'field_block:paragraph:bandcamp_product:field_product_pitch'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          d6eca6ce-0ea9-4754-82c9-cb3dca6ec321:
+            uuid: d6eca6ce-0ea9-4754-82c9-cb3dca6ec321
+            region: content
+            configuration:
+              id: 'field_block:paragraph:bandcamp_product:field_year_of_release'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: string
+                label: above
+                settings:
+                  link_to_entity: false
+                  link_rel: canonical
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+        third_party_settings: {  }
+id: paragraph.bandcamp_product.default
+targetEntityType: paragraph
+bundle: bandcamp_product
+mode: default
+content:
+  field_year_of_release:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_product_pitch: true
+  field_product_url: true
+  field_vessel: true
+  layout_builder__layout: true

@@ -1,0 +1,24 @@
+uuid: 0dd34e7b-2280-4d6f-bf04-889f5d8ef1a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.building_blocks.field_elements
+    - paragraphs.paragraphs_type.building_blocks
+  module:
+    - entity_reference_revisions
+id: paragraph.building_blocks.default
+targetEntityType: paragraph
+bundle: building_blocks
+mode: default
+content:
+  field_elements:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

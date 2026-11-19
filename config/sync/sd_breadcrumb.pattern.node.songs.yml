@@ -1,0 +1,30 @@
+entity_type: node
+bundle: songs
+disabled: false
+mode: custom
+segments:
+  -
+    label: Home
+    link: /
+    icon: null
+    display_mode: text
+    weight: -50
+  -
+    label: '[node:field_collection:entity:name]'
+    link: '/collection/[node:field_collection:entity:name]'
+    icon: null
+    display_mode: text
+    weight: -49
+  -
+    label: '[node:field_vessel:entity:name]'
+    link: '/taxonomy/term/[node:field_vessel:entity:tid]'
+    icon: null
+    display_mode: text
+    weight: 2
+  -
+    label: '[current-page:title]'
+    link: '<nolink>'
+    icon: null
+    display_mode: text
+    weight: 3
+weight: 0

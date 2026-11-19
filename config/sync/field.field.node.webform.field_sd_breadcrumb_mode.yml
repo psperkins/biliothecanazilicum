@@ -1,0 +1,21 @@
+uuid: d0aa0e9d-8f31-472a-99a9-fda99468192f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_mode
+    - node.type.webform
+id: node.webform.field_sd_breadcrumb_mode
+field_name: field_sd_breadcrumb_mode
+entity_type: node
+bundle: webform
+label: 'Breadcrumb Mode'
+description: 'Choose system default or custom breadcrumb.'
+required: false
+translatable: false
+default_value:
+  -
+    value: system_default
+default_value_callback: ''
+settings: {  }
+field_type: string

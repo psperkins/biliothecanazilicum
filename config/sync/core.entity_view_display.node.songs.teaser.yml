@@ -1,0 +1,57 @@
+uuid: 5a792626-4f03-4d48-aac2-7b2a429536d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.songs.field_addendums
+    - field.field.node.songs.field_bandcamp_product
+    - field.field.node.songs.field_collection
+    - field.field.node.songs.field_image
+    - field.field.node.songs.field_library_location
+    - field.field.node.songs.field_lyric_sheet
+    - field.field.node.songs.field_metatags
+    - field.field.node.songs.field_production_notes
+    - field.field.node.songs.field_sd_breadcrumb_automatic
+    - field.field.node.songs.field_sd_breadcrumb_disabled
+    - field.field.node.songs.field_sd_breadcrumb_mode
+    - field.field.node.songs.field_sd_breadcrumb_segments
+    - field.field.node.songs.field_song_number
+    - field.field.node.songs.field_soundcloud_track
+    - field.field.node.songs.field_vessel
+    - node.type.songs
+  module:
+    - user
+id: node.songs.teaser
+targetEntityType: node
+bundle: songs
+mode: teaser
+content:
+  field_collection:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_addendums: true
+  field_bandcamp_product: true
+  field_image: true
+  field_library_location: true
+  field_lyric_sheet: true
+  field_metatags: true
+  field_production_notes: true
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true
+  field_song_number: true
+  field_soundcloud_track: true
+  field_vessel: true

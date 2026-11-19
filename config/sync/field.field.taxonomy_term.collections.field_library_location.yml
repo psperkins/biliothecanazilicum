@@ -1,0 +1,29 @@
+uuid: 589655b4-401c-46bd-ada4-2ddecf915579
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_library_location
+    - taxonomy.vocabulary.architectural
+    - taxonomy.vocabulary.collections
+id: taxonomy_term.collections.field_library_location
+field_name: field_library_location
+entity_type: taxonomy_term
+bundle: collections
+label: 'Library Location'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      architectural: architectural
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

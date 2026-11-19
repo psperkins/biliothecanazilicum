@@ -1,0 +1,29 @@
+uuid: 0c317c54-ed30-4571-9173-1c19e8827905
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_text_fragments
+    - node.type.audio_fragments
+    - node.type.text_fragments
+id: node.audio_fragments.field_related_text_fragments
+field_name: field_related_text_fragments
+entity_type: node
+bundle: audio_fragments
+label: 'Related Text Fragments'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      text_fragments: text_fragments
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

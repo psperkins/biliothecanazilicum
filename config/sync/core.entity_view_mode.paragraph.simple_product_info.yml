@@ -1,0 +1,11 @@
+uuid: 88a95de9-f0da-4179-8746-6c5ed28b8d69
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.simple_product_info
+label: 'Simple Product Info'
+description: null
+targetEntityType: paragraph
+cache: true

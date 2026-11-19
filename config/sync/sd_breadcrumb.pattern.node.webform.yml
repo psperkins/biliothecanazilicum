@@ -1,0 +1,6 @@
+entity_type: node
+bundle: webform
+disabled: false
+mode: system_default
+segments: {  }
+weight: 0

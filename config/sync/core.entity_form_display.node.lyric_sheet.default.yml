@@ -1,0 +1,103 @@
+uuid: 71e5f839-f8a3-422b-8102-424d93498895
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.lyric_sheet.field_associated_audio_fragment
+    - field.field.node.lyric_sheet.field_content
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_automatic
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_disabled
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_mode
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_segments
+    - node.type.lyric_sheet
+  module:
+    - content_moderation
+    - path
+    - tagify
+    - text
+id: node.lyric_sheet.default
+targetEntityType: node
+bundle: lyric_sheet
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_associated_audio_fragment:
+    type: tagify_entity_reference_autocomplete_widget
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
+      parent_selection: 1
+    third_party_settings: {  }
+  field_content:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 9
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true
+  promote: true
+  publish_on: true
+  publish_state: true
+  sticky: true
+  unpublish_on: true
+  unpublish_state: true

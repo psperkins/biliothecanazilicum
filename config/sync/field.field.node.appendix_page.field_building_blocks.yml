@@ -1,0 +1,63 @@
+uuid: 01b402d6-aafa-4637-8e1b-8db6add01dbd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_building_blocks
+    - node.type.appendix_page
+    - paragraphs.paragraphs_type.bandcamp_product
+    - paragraphs.paragraphs_type.building_blocks
+    - paragraphs.paragraphs_type.from_library
+    - paragraphs.paragraphs_type.image_pull_quote
+    - paragraphs.paragraphs_type.large_inline_image
+    - paragraphs.paragraphs_type.main_body
+  module:
+    - entity_reference_revisions
+    - paragraph_blocks
+third_party_settings:
+  paragraph_blocks:
+    status: 1
+id: node.appendix_page.field_building_blocks
+field_name: field_building_blocks
+entity_type: node
+bundle: appendix_page
+label: 'Building Blocks'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      building_blocks: building_blocks
+      image_pull_quote: image_pull_quote
+      bandcamp_product: bandcamp_product
+      large_inline_image: large_inline_image
+      main_body: main_body
+      from_library: from_library
+    negate: 0
+    target_bundles_drag_drop:
+      bandcamp_product:
+        weight: 8
+        enabled: true
+      building_blocks:
+        weight: 6
+        enabled: true
+      from_library:
+        weight: 10
+        enabled: true
+      image_pull_quote:
+        weight: 7
+        enabled: true
+      large_inline_image:
+        weight: 8
+        enabled: true
+      main_body:
+        weight: 9
+        enabled: true
+      text_pull_quote:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

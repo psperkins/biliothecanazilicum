@@ -1,0 +1,29 @@
+uuid: 3839a11a-035b-42f8-a2e7-5c8d2001530e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_collection
+    - taxonomy.vocabulary.collections
+    - taxonomy.vocabulary.vessel
+id: taxonomy_term.vessel.field_collection
+field_name: field_collection
+entity_type: taxonomy_term
+bundle: vessel
+label: Collection
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      collections: collections
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

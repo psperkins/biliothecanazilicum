@@ -1,0 +1,44 @@
+uuid: 7eece07f-a899-4a35-a92b-8c59cde22a44
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.field.node.lyric_sheet.field_associated_audio_fragment
+    - field.field.node.lyric_sheet.field_content
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_automatic
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_disabled
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_mode
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_segments
+    - node.type.lyric_sheet
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.lyric_sheet.card
+targetEntityType: node
+bundle: lyric_sheet
+mode: card
+content:
+  field_associated_audio_fragment:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_content: true
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true

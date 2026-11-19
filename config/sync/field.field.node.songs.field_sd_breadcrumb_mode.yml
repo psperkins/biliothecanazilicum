@@ -1,0 +1,21 @@
+uuid: 854afd48-c528-47c8-bde2-a3995ecc4bc8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_mode
+    - node.type.songs
+id: node.songs.field_sd_breadcrumb_mode
+field_name: field_sd_breadcrumb_mode
+entity_type: node
+bundle: songs
+label: 'Breadcrumb Mode'
+description: 'Choose system default or custom breadcrumb.'
+required: false
+translatable: false
+default_value:
+  -
+    value: system_default
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,26 @@
+uuid: 10bd8193-1534-4f8d-935e-008e59f5fa93
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_product
+    - taxonomy.vocabulary.vessel
+id: taxonomy_term.vessel.field_product
+field_name: field_product
+entity_type: taxonomy_term
+bundle: vessel
+label: Product
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraphs_library_item'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

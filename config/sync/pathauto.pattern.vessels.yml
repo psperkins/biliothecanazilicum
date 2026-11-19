@@ -1,0 +1,25 @@
+uuid: d75df3ba-4a04-40af-b738-8413feb49b62
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.collections
+    - taxonomy.vocabulary.vessel
+  module:
+    - taxonomy
+id: vessels
+label: Vessels
+type: 'canonical_entities:taxonomy_term'
+pattern: '/[term:field_collection]/[term:vocabulary:machine-name]/[term:name]'
+selection_criteria:
+  2139082d-8877-4dd7-8018-58fdfacb6db0:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      collections: collections
+      vessel: vessel
+selection_logic: and
+weight: -5
+relationships: {  }

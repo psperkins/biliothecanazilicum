@@ -1,0 +1,22 @@
+uuid: b1d258e4-5464-46b2-bcb4-c3f0f10cf306
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - MysticTapeDeck
+_core:
+  default_config_hash: lGUs9OV1H5G5Z__MMW6fs0gBFqU2POvHU0xkvJuFGao
+id: MysticTapeDeck_content
+theme: MysticTapeDeck
+region: content
+weight: -5
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

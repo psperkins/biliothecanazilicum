@@ -1,0 +1,21 @@
+uuid: 4c8a0e61-94be-42dd-a3b8-4a2467823f86
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.field_audio_attribution
+field_name: field_audio_attribution
+entity_type: media
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

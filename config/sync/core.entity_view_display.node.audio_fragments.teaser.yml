@@ -1,0 +1,55 @@
+uuid: e8f1f822-eb4a-4d6c-b914-ccbd74745a70
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.audio_fragments.field_attribution
+    - field.field.node.audio_fragments.field_audio_media
+    - field.field.node.audio_fragments.field_building_blocks
+    - field.field.node.audio_fragments.field_catalog_number
+    - field.field.node.audio_fragments.field_collection
+    - field.field.node.audio_fragments.field_library_location
+    - field.field.node.audio_fragments.field_related_text_fragments
+    - field.field.node.audio_fragments.field_sd_breadcrumb_automatic
+    - field.field.node.audio_fragments.field_sd_breadcrumb_disabled
+    - field.field.node.audio_fragments.field_sd_breadcrumb_mode
+    - field.field.node.audio_fragments.field_sd_breadcrumb_segments
+    - field.field.node.audio_fragments.field_soundcloud_track
+    - field.field.node.audio_fragments.field_subtitle
+    - field.field.node.audio_fragments.layout_builder__layout
+    - node.type.audio_fragments
+  module:
+    - user
+id: node.audio_fragments.teaser
+targetEntityType: node
+bundle: audio_fragments
+mode: teaser
+content:
+  field_collection:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_attribution: true
+  field_audio_media: true
+  field_building_blocks: true
+  field_catalog_number: true
+  field_library_location: true
+  field_related_text_fragments: true
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true
+  field_soundcloud_track: true
+  field_subtitle: true
+  layout_builder__layout: true

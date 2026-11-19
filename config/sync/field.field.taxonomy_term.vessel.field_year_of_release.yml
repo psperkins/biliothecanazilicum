@@ -1,0 +1,19 @@
+uuid: bbb05eea-0011-4265-966e-a51613a1cf0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_year_of_release
+    - taxonomy.vocabulary.vessel
+id: taxonomy_term.vessel.field_year_of_release
+field_name: field_year_of_release
+entity_type: taxonomy_term
+bundle: vessel
+label: 'Year Of Release'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

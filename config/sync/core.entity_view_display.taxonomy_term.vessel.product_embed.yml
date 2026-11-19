@@ -1,0 +1,38 @@
+uuid: 3ea3db31-1ff2-469a-80a7-1517a21cfaba
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.product_embed
+    - field.field.taxonomy_term.vessel.field_collection
+    - field.field.taxonomy_term.vessel.field_image
+    - field.field.taxonomy_term.vessel.field_product
+    - field.field.taxonomy_term.vessel.field_year_of_release
+    - field.field.taxonomy_term.vessel.layout_builder__layout
+    - taxonomy.vocabulary.vessel
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: taxonomy_term.vessel.product_embed
+targetEntityType: taxonomy_term
+bundle: vessel
+mode: product_embed
+content:
+  field_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: 1_1_square_small
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  description: true
+  field_collection: true
+  field_product: true
+  field_year_of_release: true
+  layout_builder__layout: true

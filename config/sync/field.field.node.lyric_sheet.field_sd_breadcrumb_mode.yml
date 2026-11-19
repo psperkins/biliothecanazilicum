@@ -1,0 +1,21 @@
+uuid: 096043c1-3069-4feb-9491-482d471eac29
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_mode
+    - node.type.lyric_sheet
+id: node.lyric_sheet.field_sd_breadcrumb_mode
+field_name: field_sd_breadcrumb_mode
+entity_type: node
+bundle: lyric_sheet
+label: 'Breadcrumb Mode'
+description: 'Choose system default or custom breadcrumb.'
+required: false
+translatable: false
+default_value:
+  -
+    value: system_default
+default_value_callback: ''
+settings: {  }
+field_type: string

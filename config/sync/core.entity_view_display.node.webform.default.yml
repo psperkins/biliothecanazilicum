@@ -1,0 +1,69 @@
+uuid: 931d8656-f8f8-4601-8fbb-677e79d545f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.webform.field_sd_breadcrumb_automatic
+    - field.field.node.webform.field_sd_breadcrumb_disabled
+    - field.field.node.webform.field_sd_breadcrumb_mode
+    - field.field.node.webform.field_sd_breadcrumb_segments
+    - field.field.node.webform.layout_builder__layout
+    - field.field.node.webform.webform
+    - node.type.webform
+  module:
+    - layout_builder
+    - layout_discovery
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          08eda0e0-07de-4acd-9e50-b8f0d5d3cf5b:
+            uuid: 08eda0e0-07de-4acd-9e50-b8f0d5d3cf5b
+            region: content
+            configuration:
+              id: 'field_block:node:webform:webform'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: webform_entity_reference_entity_view
+                label: hidden
+                settings:
+                  source_entity: true
+                  lazy: false
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          e7c058d0-a55a-487a-bd7f-3fefb1c8bb0d:
+            uuid: e7c058d0-a55a-487a-bd7f-3fefb1c8bb0d
+            region: content
+            configuration:
+              id: 'extra_field_block:node:webform:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 2
+            additional: {  }
+        third_party_settings: {  }
+_core:
+  default_config_hash: MV3Ld22H-M37Il3nrpoZcRHkqDSOiUC6vJL0waeEWik
+id: node.webform.default
+targetEntityType: node
+bundle: webform
+mode: default
+content: {  }
+hidden:
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true
+  layout_builder__layout: true
+  links: true
+  webform: true

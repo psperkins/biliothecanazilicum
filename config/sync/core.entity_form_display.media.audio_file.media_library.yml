@@ -1,0 +1,35 @@
+uuid: d6b83710-87ec-4267-b118-9880140682c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.audio_file.field_audio_attribution
+    - field.field.media.audio_file.field_audio_subtitle
+    - field.field.media.audio_file.field_media_audio_file
+    - media.type.audio_file
+id: media.audio_file.media_library
+targetEntityType: media
+bundle: audio_file
+mode: media_library
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_audio_attribution: true
+  field_audio_subtitle: true
+  field_media_audio_file: true
+  path: true
+  publish_on: true
+  publish_state: true
+  status: true
+  uid: true
+  unpublish_on: true
+  unpublish_state: true

@@ -1,0 +1,10 @@
+uuid: d8ff3cb2-9764-40f1-948b-47b8f826ad17
+langcode: en
+status: true
+dependencies: {  }
+id: text_pull_quote
+label: 'Text Pull Quote'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

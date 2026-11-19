@@ -1,0 +1,19 @@
+uuid: 374b2479-db5b-466d-a5c6-e982fef033e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subtitle
+    - node.type.audio_fragments
+id: node.audio_fragments.field_subtitle
+field_name: field_subtitle
+entity_type: node
+bundle: audio_fragments
+label: Subtitle
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

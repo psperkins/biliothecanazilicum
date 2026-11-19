@@ -1,0 +1,27 @@
+uuid: b646a490-eb12-4284-b133-7c3ccc9781b9
+langcode: en
+status: false
+dependencies:
+  module:
+    - node
+  theme:
+    - MysticTapeDeck
+id: mtd_pagetitle
+theme: MysticTapeDeck
+region: content
+weight: 0
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      text_fragments: text_fragments

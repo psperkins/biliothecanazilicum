@@ -1,0 +1,8 @@
+uuid: b19a6ccd-029a-4e6e-9fa5-e503b67ede13
+langcode: en
+status: true
+dependencies: {  }
+id: reusable_shards
+label: 'Reusable Shards'
+revision: false
+description: null

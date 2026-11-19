@@ -1,0 +1,23 @@
+uuid: 5395005b-b096-4f4e-9af3-e0c06b5abde5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_song_number
+    - node.type.songs
+id: node.songs.field_song_number
+field_name: field_song_number
+entity_type: node
+bundle: songs
+label: 'Song Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

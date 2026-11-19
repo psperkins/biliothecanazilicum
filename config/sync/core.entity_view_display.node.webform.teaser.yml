@@ -1,0 +1,34 @@
+uuid: ac4b6087-e6c6-4d77-bf5b-2c68ab816409
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.webform.field_sd_breadcrumb_automatic
+    - field.field.node.webform.field_sd_breadcrumb_disabled
+    - field.field.node.webform.field_sd_breadcrumb_mode
+    - field.field.node.webform.field_sd_breadcrumb_segments
+    - field.field.node.webform.layout_builder__layout
+    - field.field.node.webform.webform
+    - node.type.webform
+  module:
+    - user
+_core:
+  default_config_hash: 1Fm_pxiqdI07PvxM8aiSmpsJf0NwkTgsqrNbO4MuID0
+id: node.webform.teaser
+targetEntityType: node
+bundle: webform
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true
+  layout_builder__layout: true
+  webform: true

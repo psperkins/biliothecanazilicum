@@ -1,0 +1,19 @@
+uuid: 6c9ffc37-932a-47d9-a3a8-5f12930d3891
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_related_text_fragments
+field_name: field_related_text_fragments
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

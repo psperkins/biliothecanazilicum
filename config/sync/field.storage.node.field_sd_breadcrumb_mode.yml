@@ -1,0 +1,21 @@
+uuid: b8bbbd50-71c4-4c63-a73c-9db2054e5e58
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_sd_breadcrumb_mode
+field_name: field_sd_breadcrumb_mode
+entity_type: node
+type: string
+settings:
+  max_length: 50
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

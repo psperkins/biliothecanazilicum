@@ -1,0 +1,32 @@
+uuid: 91b41572-786e-47c1-bbec-8be9a1536da6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.image_pull_quote.field_block_image
+    - field.field.paragraph.image_pull_quote.field_text_pull_quote
+    - paragraphs.paragraphs_type.image_pull_quote
+  module:
+    - text
+id: paragraph.image_pull_quote.default
+targetEntityType: paragraph
+bundle: image_pull_quote
+mode: default
+content:
+  field_block_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_text_pull_quote:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

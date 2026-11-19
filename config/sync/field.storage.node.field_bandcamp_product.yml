@@ -1,0 +1,20 @@
+uuid: 2dcec6e3-91b0-4a2f-81e3-43959cfc8014
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - paragraphs_library
+id: node.field_bandcamp_product
+field_name: field_bandcamp_product
+entity_type: node
+type: entity_reference
+settings:
+  target_type: paragraphs_library_item
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

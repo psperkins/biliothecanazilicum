@@ -1,0 +1,19 @@
+uuid: 7f3c0281-23c4-4c83-bd28-8bab59c81e20
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_attribution
+    - node.type.text_fragments
+id: node.text_fragments.field_attribution
+field_name: field_attribution
+entity_type: node
+bundle: text_fragments
+label: Attribution
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

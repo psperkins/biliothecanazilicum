@@ -1,0 +1,103 @@
+uuid: 8085fd9a-0dac-436b-b6f2-f254e97bc239
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.scholarly_notations.field_attach_to
+    - field.field.node.scholarly_notations.field_notes
+    - field.field.node.scholarly_notations.field_sd_breadcrumb_automatic
+    - field.field.node.scholarly_notations.field_sd_breadcrumb_disabled
+    - field.field.node.scholarly_notations.field_sd_breadcrumb_mode
+    - field.field.node.scholarly_notations.field_sd_breadcrumb_segments
+    - node.type.scholarly_notations
+  module:
+    - content_moderation
+    - path
+    - tagify
+    - text
+id: node.scholarly_notations.default
+targetEntityType: node
+bundle: scholarly_notations
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_attach_to:
+    type: tagify_entity_reference_autocomplete_widget
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      placeholder: ''
+      suggestions_dropdown: 1
+      show_entity_id: 0
+      show_info_label: 0
+      info_label: ''
+      parent_selection: 1
+    third_party_settings: {  }
+  field_notes:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true
+  promote: true
+  publish_on: true
+  publish_state: true
+  sticky: true
+  unpublish_on: true
+  unpublish_state: true

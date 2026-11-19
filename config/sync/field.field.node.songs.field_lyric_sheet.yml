@@ -1,0 +1,22 @@
+uuid: a2d3c570-e9eb-45f2-8dd5-037202b6b846
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lyric_sheet
+    - node.type.songs
+  module:
+    - text
+id: node.songs.field_lyric_sheet
+field_name: field_lyric_sheet
+entity_type: node
+bundle: songs
+label: 'Lyric Sheet'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

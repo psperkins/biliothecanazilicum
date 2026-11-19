@@ -1,0 +1,23 @@
+uuid: 2cb02423-88f1-49be-a039-1653cbc9f811
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_automatic
+    - node.type.webform
+id: node.webform.field_sd_breadcrumb_automatic
+field_name: field_sd_breadcrumb_automatic
+entity_type: node
+bundle: webform
+label: 'Use Automatic Breadcrumbs'
+description: 'When checked, use content type breadcrumb pattern. Uncheck to customize for this node.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

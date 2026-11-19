@@ -1,0 +1,31 @@
+uuid: 24e8f61c-36fa-4c24-809f-f2d3e14085d6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_associated_audio_fragment
+    - node.type.audio_fragments
+    - node.type.songs
+    - node.type.text_fragments
+id: node.text_fragments.field_associated_audio_fragment
+field_name: field_associated_audio_fragment
+entity_type: node
+bundle: text_fragments
+label: 'Associated Audio Fragment'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      audio_fragments: audio_fragments
+      songs: songs
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: audio_fragments
+field_type: entity_reference

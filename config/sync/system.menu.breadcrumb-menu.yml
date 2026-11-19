@@ -1,0 +1,8 @@
+uuid: 196adbb1-55aa-445a-bb07-9da46cf6e699
+langcode: en
+status: true
+dependencies: {  }
+id: breadcrumb-menu
+label: 'Breadcrumb Menu'
+description: ''
+locked: false

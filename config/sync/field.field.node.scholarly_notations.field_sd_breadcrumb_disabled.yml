@@ -1,0 +1,23 @@
+uuid: bbe996a9-a10e-456c-b2e9-ff99ce3d6031
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_disabled
+    - node.type.scholarly_notations
+id: node.scholarly_notations.field_sd_breadcrumb_disabled
+field_name: field_sd_breadcrumb_disabled
+entity_type: node
+bundle: scholarly_notations
+label: 'Breadcrumb Disabled'
+description: 'When checked, breadcrumbs will not be displayed for this node.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

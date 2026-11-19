@@ -1,0 +1,19 @@
+uuid: 03faa42c-3475-4818-8349-0f2c3658f78f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_old_url
+    - node.type.text_fragments
+id: node.text_fragments.field_old_url
+field_name: field_old_url
+entity_type: node
+bundle: text_fragments
+label: 'Old URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

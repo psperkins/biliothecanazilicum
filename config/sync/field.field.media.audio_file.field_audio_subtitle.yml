@@ -1,0 +1,19 @@
+uuid: f3e25f70-7fc4-4ca6-920c-0b2cceafcc30
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_audio_subtitle
+    - media.type.audio_file
+id: media.audio_file.field_audio_subtitle
+field_name: field_audio_subtitle
+entity_type: media
+bundle: audio_file
+label: 'Audio Subtitle'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

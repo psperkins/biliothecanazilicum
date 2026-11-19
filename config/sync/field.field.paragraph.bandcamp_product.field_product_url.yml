@@ -1,0 +1,23 @@
+uuid: 9f5e2cf4-f1fe-49bd-a6e9-d751595a15d6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_product_url
+    - paragraphs.paragraphs_type.bandcamp_product
+  module:
+    - link
+id: paragraph.bandcamp_product.field_product_url
+field_name: field_product_url
+entity_type: paragraph
+bundle: bandcamp_product
+label: 'Product URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

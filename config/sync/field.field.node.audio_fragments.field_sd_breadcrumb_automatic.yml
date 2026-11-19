@@ -1,0 +1,23 @@
+uuid: 4fdf7bff-e4ed-4b62-8581-0f750d14fb63
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_automatic
+    - node.type.audio_fragments
+id: node.audio_fragments.field_sd_breadcrumb_automatic
+field_name: field_sd_breadcrumb_automatic
+entity_type: node
+bundle: audio_fragments
+label: 'Use Automatic Breadcrumbs'
+description: 'When checked, use content type breadcrumb pattern. Uncheck to customize for this node.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

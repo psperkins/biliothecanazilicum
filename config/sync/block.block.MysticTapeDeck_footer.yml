@@ -1,0 +1,27 @@
+uuid: 5232da76-6d92-4ef1-9f01-9300e470f40a
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - MysticTapeDeck
+_core:
+  default_config_hash: Bcol2SiNe-RQBZaI1_CCgB0QDTrxC6fNfuaNeRWmLMw
+id: MysticTapeDeck_footer
+theme: MysticTapeDeck
+region: footer
+weight: -5
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Footer menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

@@ -1,0 +1,29 @@
+uuid: 1ef23cdf-2b5f-4a4d-9e2b-e555aeaef68c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vessel
+    - paragraphs.paragraphs_type.bandcamp_product
+    - taxonomy.vocabulary.vessel
+id: paragraph.bandcamp_product.field_vessel
+field_name: field_vessel
+entity_type: paragraph
+bundle: bandcamp_product
+label: Vessel
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      vessel: vessel
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

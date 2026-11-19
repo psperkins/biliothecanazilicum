@@ -1,0 +1,29 @@
+uuid: 36e80987-4b8c-410f-ae14-a0e95705d555
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_attach_to
+    - node.type.scholarly_notations
+    - node.type.songs
+id: node.scholarly_notations.field_attach_to
+field_name: field_attach_to
+entity_type: node
+bundle: scholarly_notations
+label: 'Attach To'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      songs: songs
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: songs
+field_type: entity_reference

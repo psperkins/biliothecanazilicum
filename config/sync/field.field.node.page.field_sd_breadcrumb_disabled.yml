@@ -1,0 +1,23 @@
+uuid: a7439266-bb29-4d7a-bd55-de0deaadae60
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_disabled
+    - node.type.page
+id: node.page.field_sd_breadcrumb_disabled
+field_name: field_sd_breadcrumb_disabled
+entity_type: node
+bundle: page
+label: 'Breadcrumb Disabled'
+description: 'When checked, breadcrumbs will not be displayed for this node.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

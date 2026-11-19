@@ -1,0 +1,81 @@
+uuid: 86791cd0-19a8-43ac-836a-4149a91bdc4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.text_fragments.field_building_blocks
+    - node.type.text_fragments
+  module:
+    - feeds_ex
+    - node
+    - paragraphs
+label: 'WP Posts JSON'
+id: wp_posts_json
+description: ''
+help: ''
+import_period: -1
+import_period_per_feed: false
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: jsonpath
+parser_configuration:
+  context:
+    value: '$.*'
+  source_encoding:
+    - auto
+  display_errors: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: text_fragments
+  langcode: en
+  insert_new: 1
+  update_existing: 0
+  update_non_existent: _keep
+  skip_hash_check: false
+  skip_validation: false
+  skip_validation_types: {  }
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 1
+custom_sources:
+  title:
+    value: title
+    label: title
+    machine_name: title
+    type: json
+  title_rendered:
+    value: title.rendered
+    label: title.rendered
+    machine_name: title_rendered
+    type: json
+  content_rendered:
+    value: content.rendered
+    label: content.rendered
+    machine_name: content_rendered
+    type: json
+mappings:
+  -
+    target: title
+    map:
+      value: title_rendered
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_building_blocks
+    map:
+      value: content_rendered
+    settings:
+      paragraphs_type: main_body
+      paragraph_field: field_body_text
+      language: ''
+      format: content_format

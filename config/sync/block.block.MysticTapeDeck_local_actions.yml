@@ -1,0 +1,20 @@
+uuid: 67320693-01f0-4769-9f5c-6480efb15774
+langcode: en
+status: true
+dependencies:
+  theme:
+    - MysticTapeDeck
+_core:
+  default_config_hash: B9fYxnXhvCWHmkIrUCBpJ9wqCIBozok_2VE8DVS_fYc
+id: MysticTapeDeck_local_actions
+theme: MysticTapeDeck
+region: header
+weight: -4
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

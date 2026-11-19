@@ -1,0 +1,21 @@
+uuid: 2d600b9c-45b6-4fae-ae01-ac563d62fd87
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_segments
+    - node.type.songs
+id: node.songs.field_sd_breadcrumb_segments
+field_name: field_sd_breadcrumb_segments
+entity_type: node
+bundle: songs
+label: 'Breadcrumb Segments'
+description: 'JSON encoded custom breadcrumb segments.'
+required: false
+translatable: false
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string_long

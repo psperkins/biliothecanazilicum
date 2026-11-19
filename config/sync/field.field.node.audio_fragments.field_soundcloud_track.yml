@@ -1,0 +1,29 @@
+uuid: fd7708d7-05e7-4f57-b829-3e67d7793c49
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_soundcloud_track
+    - media.type.soundcloud
+    - node.type.audio_fragments
+id: node.audio_fragments.field_soundcloud_track
+field_name: field_soundcloud_track
+entity_type: node
+bundle: audio_fragments
+label: 'Soundcloud Track'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      soundcloud: soundcloud
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
