@@ -1,0 +1,7 @@
+views.display.rest_export_clean:
+  type: views.display.rest_export_nested
+  label: 'REST export (clean) display options'
+  mapping:
+    markdown:
+      type: boolean
+      label: 'Convert HTML fields to Markdown'

@@ -11,6 +11,7 @@ module:
   bootstrap_styles: 0
   bpmn_io: 0
   breakpoint: 0
+  canon_api: 0
   captcha: 0
   ckeditor5: 0
   coffee: 0

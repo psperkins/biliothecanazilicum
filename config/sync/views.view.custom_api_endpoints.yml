@@ -10,9 +10,9 @@ dependencies:
     - node.type.scholarly_notations
     - node.type.songs
   module:
+    - canon_api
     - node
     - rest
-    - rest_export_nested
     - serialization
     - taxonomy
     - text
@@ -614,7 +614,7 @@ display:
   rest_export_1:
     id: rest_export_1
     display_title: 'REST export'
-    display_plugin: rest_export_nested
+    display_plugin: rest_export_clean
     position: 1
     display_options:
       fields:
@@ -736,7 +736,7 @@ display:
           click_sort_column: value
           type: text_default
           settings: {  }
-          group_column: value
+          group_column: entity_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -836,7 +836,7 @@ display:
             prefix: ''
             suffix: ''
             target: ''
-            nl2br: true
+            nl2br: false
             max_length: 0
             word_boundary: true
             ellipsis: true
@@ -1209,6 +1209,7 @@ display:
           metatags: {  }
           tokenize: false
       path: izizop/songs
+      markdown: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -1320,7 +1321,7 @@ display:
             prefix: ''
             suffix: ''
             target: ''
-            nl2br: true
+            nl2br: false
             max_length: 0
             word_boundary: true
             ellipsis: true

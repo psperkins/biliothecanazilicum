@@ -62,7 +62,8 @@
         "drupal/views_data_export": "^1.10",
         "drupal/views_field_view": "^1.0",
         "drupal/webform": "@beta",
-        "drupal/xmlsitemap": "^2.0"
+        "drupal/xmlsitemap": "^2.0",
+        "league/html-to-markdown": "^5.1"
     },
     "require-dev": {
         "drush/drush": "^13.7"
