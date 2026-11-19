@@ -170,6 +170,10 @@ class RestExportClean extends RestExportNested {
     // The converter re-escapes literal text such as "<instrumental>"; consumers
     // of this API read plain text, so decode it back.
     $markdown = html_entity_decode($markdown, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    // The converter also backslash-escapes literal Markdown punctuation, e.g.
+    // a footnote "*" becomes "\*". Real formatting is never escaped, so drop
+    // the backslashes to keep the text exactly as the author wrote it.
+    $markdown = preg_replace('/\\\\([\\\\`*_{}\[\]()#+\-.!|<>~])/', '$1', $markdown);
     // Non-breaking spaces become normal spaces.
     $markdown = str_replace("\u{00A0}", ' ', $markdown);
     // Drop headings with no text, e.g. from <h3>&nbsp;</h3>.
