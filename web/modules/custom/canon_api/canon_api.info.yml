@@ -1,0 +1,9 @@
+name: 'Canon API'
+type: module
+description: 'Clean JSON output for the canon API endpoints: readable characters and HTML converted to Markdown.'
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - drupal:rest
+  - drupal:views
+  - rest_export_nested:rest_export_nested
