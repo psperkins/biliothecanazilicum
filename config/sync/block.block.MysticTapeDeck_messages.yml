@@ -1,0 +1,22 @@
+uuid: 381adaa4-98c0-4ac0-b077-279a9ab1ab44
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - MysticTapeDeck
+_core:
+  default_config_hash: NML5XP1QvF4K5KphH7vOI1_j2XvILhYeBSMppoDDg1k
+id: MysticTapeDeck_messages
+theme: MysticTapeDeck
+region: header
+weight: -3
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

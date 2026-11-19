@@ -1,0 +1,24 @@
+uuid: 959a6ba3-9243-448a-80b3-126d01671497
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_pull_quote
+    - filter.format.content_format
+    - paragraphs.paragraphs_type.image_pull_quote
+  module:
+    - text
+id: paragraph.image_pull_quote.field_text_pull_quote
+field_name: field_text_pull_quote
+entity_type: paragraph
+bundle: image_pull_quote
+label: 'Text Pull Quote'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - content_format
+field_type: text

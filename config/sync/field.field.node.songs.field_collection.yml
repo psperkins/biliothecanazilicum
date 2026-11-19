@@ -1,0 +1,29 @@
+uuid: ccebd740-0c46-4966-b26b-de74210e78a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_collection
+    - node.type.songs
+    - taxonomy.vocabulary.collections
+id: node.songs.field_collection
+field_name: field_collection
+entity_type: node
+bundle: songs
+label: 'Collection: '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      collections: collections
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

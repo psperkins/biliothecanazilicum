@@ -1,0 +1,15 @@
+uuid: 57422cc9-8ed3-44b8-9b7e-e22816cb48d2
+langcode: en
+status: true
+dependencies: {  }
+name: og_image
+label: 'og image'
+effects:
+  2ea184f7-0f82-4a82-9984-9d7aa0c65da5:
+    uuid: 2ea184f7-0f82-4a82-9984-9d7aa0c65da5
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 630
+      anchor: center-center

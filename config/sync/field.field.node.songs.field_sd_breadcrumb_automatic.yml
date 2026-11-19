@@ -1,0 +1,23 @@
+uuid: 8a6551b6-cd7c-4cc6-ba3a-83221e51220a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_automatic
+    - node.type.songs
+id: node.songs.field_sd_breadcrumb_automatic
+field_name: field_sd_breadcrumb_automatic
+entity_type: node
+bundle: songs
+label: 'Use Automatic Breadcrumbs'
+description: 'When checked, use content type breadcrumb pattern. Uncheck to customize for this node.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

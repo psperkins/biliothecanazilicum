@@ -1,0 +1,11 @@
+uuid: 261f6d25-bdd4-4718-a77b-ed9f8049fd6c
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs_library
+id: paragraphs_library_item.product_simple
+label: 'Product Simple'
+description: null
+targetEntityType: paragraphs_library_item
+cache: true

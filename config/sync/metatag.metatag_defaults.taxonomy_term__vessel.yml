@@ -1,0 +1,18 @@
+uuid: a551d82b-1f06-46bb-b3a5-b9c6e6011788
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_term__vessel
+label: 'Taxonomy term: IZIZOP'
+tags:
+  description: '[term:description]'
+  generator: '<none>'
+  image_src: '[term:field_image:0:entity:field_media_image:og_image|"https://cloakofnazili.org/sites/default/files/styles/og_image/public/2026-07/BOTSS-inside-1.jpg"]'
+  og_description: '[term:description]'
+  og_image: '[term:field_image:0:entity:field_media_image:og_image|"https://cloakofnazili.org/sites/default/files/styles/og_image/public/2026-07/BOTSS-inside-1.jpg"]'
+  og_site_name: '[site:name]'
+  og_title: 'BARDS: [term:name]'
+  og_type: book
+  og_url: '[current-page:url]'
+  robots: 'max-image-preview:large'
+  title: 'BARDS: [term:name]'

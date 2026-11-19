@@ -1,0 +1,47 @@
+uuid: 990e809c-e980-4070-b3ab-a67b68808190
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.reusable_shards
+    - field.storage.block_content.field_building_blocks
+    - paragraphs.paragraphs_type.building_blocks
+  module:
+    - entity_reference_revisions
+    - paragraph_blocks
+third_party_settings:
+  paragraph_blocks:
+    status: 1
+id: block_content.reusable_shards.field_building_blocks
+field_name: field_building_blocks
+entity_type: block_content
+bundle: reusable_shards
+label: 'Building Blocks'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      building_blocks: building_blocks
+    negate: 0
+    target_bundles_drag_drop:
+      building_blocks:
+        weight: 6
+        enabled: true
+      image_pull_quote:
+        weight: 7
+        enabled: false
+      large_inline_image:
+        weight: 8
+        enabled: false
+      main_body:
+        weight: 9
+        enabled: false
+      text_pull_quote:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

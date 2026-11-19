@@ -1,0 +1,135 @@
+uuid: 2d40deb7-b64f-4c81-8a77-dd632af782da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.text_fragments.field_building_blocks
+    - field.field.node.text_fragments.field_library_location
+    - field.field.node.text_fragments.field_old_url
+    - node.type.text_fragments
+  module:
+    - feeds_tamper
+    - node
+    - paragraphs
+third_party_settings:
+  feeds_tamper:
+    tampers:
+      c7a4eb9a-83c4-4d73-b50f-fd116eaab98a:
+        default_value: Mezzanine
+        only_if_empty: false
+        uuid: c7a4eb9a-83c4-4d73-b50f-fd116eaab98a
+        plugin: default_value
+        source: area
+        weight: 0
+        label: 'Set value or default value'
+label: 'Posts from WP'
+id: posts_from_wp
+description: ''
+help: ''
+import_period: -1
+import_period_per_feed: false
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'public://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: text_fragments
+  langcode: en
+  insert_new: 1
+  update_existing: 0
+  update_non_existent: _keep
+  skip_hash_check: false
+  skip_validation: false
+  skip_validation_types: {  }
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: true
+  owner_id: 0
+custom_sources:
+  title:
+    value: Title
+    label: Title
+    machine_name: title
+    type: csv
+  body:
+    value: Body
+    label: Body
+    machine_name: body
+    type: csv
+  content:
+    value: Content
+    label: Content
+    machine_name: content
+    type: csv
+  date:
+    value: Date
+    label: Date
+    machine_name: date
+    type: csv
+  slug:
+    value: Slug
+    label: Slug
+    machine_name: slug
+    type: csv
+  area:
+    value: Area
+    label: Area
+    machine_name: area
+    type: blank
+mappings:
+  -
+    target: title
+    map:
+      value: title
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_building_blocks
+    map:
+      value: content
+    settings:
+      paragraphs_type: main_body
+      paragraph_field: field_body_text
+      language: en
+      format: content_format
+  -
+    target: created
+    map:
+      value: date
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_library_location
+    map:
+      target_id: area
+    settings:
+      language: null
+      reference_by: name
+      autocreate: false
+      autocreate_bundle: architectural
+  -
+    target: field_old_url
+    map:
+      value: slug
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_building_blocks
+    map:
+      value: ''
+    settings:
+      paragraphs_type: main_body
+      paragraph_field: ''
+      language: ''
+      format: plain_text

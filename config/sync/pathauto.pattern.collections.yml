@@ -1,0 +1,23 @@
+uuid: d7dfdf67-36b5-4198-a986-f5492bb93785
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.collections
+  module:
+    - taxonomy
+id: collections
+label: Collections
+type: 'canonical_entities:taxonomy_term'
+pattern: '/collection/[term:name]'
+selection_criteria:
+  5e3ed4e3-860b-4d30-9c25-b7da24579510:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      collections: collections
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,10 @@
+uuid: 5916d128-fe08-4bc3-8f4d-b30a8e01b617
+langcode: en
+status: true
+dependencies: {  }
+id: bandcamp_product
+label: 'Bandcamp Product'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

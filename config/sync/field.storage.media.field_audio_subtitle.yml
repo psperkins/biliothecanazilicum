@@ -1,0 +1,21 @@
+uuid: 3540eb6d-9184-41fb-b976-9a4c42d7222e
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.field_audio_subtitle
+field_name: field_audio_subtitle
+entity_type: media
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

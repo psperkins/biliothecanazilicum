@@ -1,0 +1,20 @@
+uuid: 902ef989-6eb6-4b8f-ab44-4dc705d7fcc4
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_text_pull_quote
+field_name: field_text_pull_quote
+entity_type: paragraph
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

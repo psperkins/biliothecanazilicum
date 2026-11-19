@@ -1,0 +1,29 @@
+uuid: 11fe8cb7-4e70-44d1-8534-f8fd5122bc1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_associated_song
+    - media.type.remote_video
+    - node.type.songs
+id: media.remote_video.field_associated_song
+field_name: field_associated_song
+entity_type: media
+bundle: remote_video
+label: 'Associated Song'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      songs: songs
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

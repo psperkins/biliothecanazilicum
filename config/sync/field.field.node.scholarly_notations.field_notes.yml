@@ -1,0 +1,24 @@
+uuid: 4e955c18-d124-4d42-8b5b-8b75908f5e34
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_notes
+    - filter.format.content_format
+    - node.type.scholarly_notations
+  module:
+    - text
+id: node.scholarly_notations.field_notes
+field_name: field_notes
+entity_type: node
+bundle: scholarly_notations
+label: Notes
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - content_format
+field_type: text_long

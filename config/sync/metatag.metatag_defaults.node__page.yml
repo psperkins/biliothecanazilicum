@@ -1,0 +1,16 @@
+uuid: 8286c567-e00d-4cf2-9f15-e89b4df85060
+langcode: en
+status: true
+dependencies: {  }
+id: node__page
+label: 'Content: Utility page'
+tags:
+  canonical_url: '[current-page:url]'
+  image_src: '[node:field_featured_image]'
+  og_description: '[site:slogan | site:name]'
+  og_image: '[node:field_featured_image]'
+  og_site_name: '[site:name]'
+  og_title: '[current-page:title]'
+  og_type: 'reference materials'
+  og_url: '[current-page:url]'
+  robots: 'max-image-preview:large'

@@ -1,0 +1,23 @@
+uuid: 6309d496-826f-443f-aef4-4d25ded0a87d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_automatic
+    - node.type.lyric_sheet
+id: node.lyric_sheet.field_sd_breadcrumb_automatic
+field_name: field_sd_breadcrumb_automatic
+entity_type: node
+bundle: lyric_sheet
+label: 'Use Automatic Breadcrumbs'
+description: 'When checked, use content type breadcrumb pattern. Uncheck to customize for this node.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

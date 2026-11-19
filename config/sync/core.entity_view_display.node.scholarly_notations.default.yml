@@ -1,0 +1,45 @@
+uuid: 45322f1f-eb0b-4140-a8bf-83af727e3842
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.scholarly_notations.field_attach_to
+    - field.field.node.scholarly_notations.field_notes
+    - field.field.node.scholarly_notations.field_sd_breadcrumb_automatic
+    - field.field.node.scholarly_notations.field_sd_breadcrumb_disabled
+    - field.field.node.scholarly_notations.field_sd_breadcrumb_mode
+    - field.field.node.scholarly_notations.field_sd_breadcrumb_segments
+    - node.type.scholarly_notations
+  module:
+    - text
+    - user
+id: node.scholarly_notations.default
+targetEntityType: node
+bundle: scholarly_notations
+mode: default
+content:
+  field_attach_to:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_notes:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true

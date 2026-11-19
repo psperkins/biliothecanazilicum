@@ -1,0 +1,19 @@
+uuid: f21c6c2b-79ad-48ff-82de-db5b3b5b7537
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_catalog_number
+    - node.type.text_fragments
+id: node.text_fragments.field_catalog_number
+field_name: field_catalog_number
+entity_type: node
+bundle: text_fragments
+label: 'Catalog Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

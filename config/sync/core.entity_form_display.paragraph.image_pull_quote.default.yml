@@ -1,0 +1,42 @@
+uuid: d339887c-7a00-4083-8bb2-fd5818478753
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.image_pull_quote.field_block_image
+    - field.field.paragraph.image_pull_quote.field_text_pull_quote
+    - paragraphs.paragraphs_type.image_pull_quote
+  module:
+    - media_library
+    - text
+id: paragraph.image_pull_quote.default
+targetEntityType: paragraph
+bundle: image_pull_quote
+mode: default
+content:
+  admin_title:
+    type: string_textfield
+    weight: -10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_block_image:
+    type: media_library_widget
+    weight: -9
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_text_pull_quote:
+    type: text_textfield
+    weight: -8
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

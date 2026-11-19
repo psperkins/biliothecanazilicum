@@ -1,0 +1,127 @@
+uuid: aa9ca5ca-5a2c-479f-99ab-ed769a4dcd84
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.songs.field_addendums
+    - field.field.node.songs.field_bandcamp_product
+    - field.field.node.songs.field_collection
+    - field.field.node.songs.field_image
+    - field.field.node.songs.field_library_location
+    - field.field.node.songs.field_lyric_sheet
+    - field.field.node.songs.field_metatags
+    - field.field.node.songs.field_production_notes
+    - field.field.node.songs.field_sd_breadcrumb_automatic
+    - field.field.node.songs.field_sd_breadcrumb_disabled
+    - field.field.node.songs.field_sd_breadcrumb_mode
+    - field.field.node.songs.field_sd_breadcrumb_segments
+    - field.field.node.songs.field_song_number
+    - field.field.node.songs.field_soundcloud_track
+    - field.field.node.songs.field_vessel
+    - node.type.songs
+  module:
+    - metatag
+    - text
+    - user
+id: node.songs.default
+targetEntityType: node
+bundle: songs
+mode: default
+content:
+  field_addendums:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_bandcamp_product:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_collection:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_library_location:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_lyric_sheet:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_metatags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_production_notes:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_song_number:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_soundcloud_track:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_vessel:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true

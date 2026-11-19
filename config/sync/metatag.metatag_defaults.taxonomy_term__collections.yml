@@ -1,0 +1,20 @@
+uuid: aa53e997-ee64-42d8-acc9-32757e47f7f7
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_term__collections
+label: 'Taxonomy term: Collections'
+tags:
+  canonical_url: '[term:url]'
+  description: '[term:description]'
+  image_src: '[term:field_image:0:entity:field_media_image:og_image|"https://cloakofnazili.org/sites/default/files/styles/og_image/public/2026-07/BOTSS-inside-1.jpg?itok-kjbdvj"]'
+  og_description: '[term:description]'
+  og_image: '[term:field_image:0:entity:field_media_image:og_image|"https://cloakofnazili.org/sites/default/files/styles/og_image/public/2026-07/BOTSS-inside-1.jpg?itok-kjbdvj"]'
+  og_image_height: '360'
+  og_image_width: '1200'
+  og_site_name: '[site:name]'
+  og_title: '[term:name] | [site:name]'
+  og_type: collection
+  og_url: '[term:url]'
+  robots: 'max-image-preview:large'
+  title: '[site:name]'

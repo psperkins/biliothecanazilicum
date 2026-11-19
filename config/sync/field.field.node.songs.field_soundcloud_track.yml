@@ -1,0 +1,29 @@
+uuid: 52b4e285-c659-47b0-8ae2-3b03628f36d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_soundcloud_track
+    - media.type.soundcloud
+    - node.type.songs
+id: node.songs.field_soundcloud_track
+field_name: field_soundcloud_track
+entity_type: node
+bundle: songs
+label: 'Soundcloud Track'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      soundcloud: soundcloud
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

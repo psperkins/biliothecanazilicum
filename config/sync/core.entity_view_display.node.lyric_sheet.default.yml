@@ -1,0 +1,55 @@
+uuid: 9bf7f680-9180-44af-a4a3-b2e2adf46389
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.lyric_sheet.field_associated_audio_fragment
+    - field.field.node.lyric_sheet.field_content
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_automatic
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_disabled
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_mode
+    - field.field.node.lyric_sheet.field_sd_breadcrumb_segments
+    - node.type.lyric_sheet
+  module:
+    - layout_builder
+    - layout_discovery
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          97399ea4-9c85-48a8-8195-c5410162a96c:
+            uuid: 97399ea4-9c85-48a8-8195-c5410162a96c
+            region: content
+            configuration:
+              id: 'field_block:node:lyric_sheet:field_content'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+id: node.lyric_sheet.default
+targetEntityType: node
+bundle: lyric_sheet
+mode: default
+content: {  }
+hidden:
+  field_associated_audio_fragment: true
+  field_content: true
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true
+  links: true

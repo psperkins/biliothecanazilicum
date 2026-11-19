@@ -1,0 +1,21 @@
+uuid: 1772e64a-1f78-4475-a234-9c60a066102c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_metatags
+    - node.type.songs
+  module:
+    - metatag
+id: node.songs.field_metatags
+field_name: field_metatags
+entity_type: node
+bundle: songs
+label: Metatags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

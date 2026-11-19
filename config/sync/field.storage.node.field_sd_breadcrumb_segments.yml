@@ -1,0 +1,19 @@
+uuid: 3747f45b-21e8-4105-99a7-c20c710b1f74
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_sd_breadcrumb_segments
+field_name: field_sd_breadcrumb_segments
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

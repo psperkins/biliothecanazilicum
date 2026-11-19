@@ -1,0 +1,29 @@
+uuid: 6b7a0f45-329b-45d5-bae9-8150f9057595
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_library_location
+    - node.type.audio_fragments
+    - taxonomy.vocabulary.architectural
+id: node.audio_fragments.field_library_location
+field_name: field_library_location
+entity_type: node
+bundle: audio_fragments
+label: 'Library Location'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      architectural: architectural
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

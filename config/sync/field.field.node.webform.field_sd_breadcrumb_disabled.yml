@@ -1,0 +1,23 @@
+uuid: 0d95a570-a021-44c9-b6ae-427b96921d46
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_disabled
+    - node.type.webform
+id: node.webform.field_sd_breadcrumb_disabled
+field_name: field_sd_breadcrumb_disabled
+entity_type: node
+bundle: webform
+label: 'Breadcrumb Disabled'
+description: 'When checked, breadcrumbs will not be displayed for this node.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

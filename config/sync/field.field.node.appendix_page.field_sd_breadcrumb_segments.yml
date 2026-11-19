@@ -1,0 +1,21 @@
+uuid: 68fc3b97-2a58-4351-89de-3f57ae1523e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_segments
+    - node.type.appendix_page
+id: node.appendix_page.field_sd_breadcrumb_segments
+field_name: field_sd_breadcrumb_segments
+entity_type: node
+bundle: appendix_page
+label: 'Breadcrumb Segments'
+description: 'JSON encoded custom breadcrumb segments.'
+required: false
+translatable: false
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string_long

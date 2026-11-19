@@ -1,0 +1,20 @@
+uuid: 57012712-1e8e-42c6-b3ea-f48b2d789e70
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs_library
+    - taxonomy
+id: taxonomy_term.field_product
+field_name: field_product
+entity_type: taxonomy_term
+type: entity_reference
+settings:
+  target_type: paragraphs_library_item
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

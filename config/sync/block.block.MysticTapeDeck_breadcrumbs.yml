@@ -1,0 +1,22 @@
+uuid: b3d0b647-2921-494d-8370-cc36d41eebcd
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - MysticTapeDeck
+_core:
+  default_config_hash: zAv6_9_gJF45KSRn_3zTVfeZDEsG2fnneEwcVkDhFwA
+id: MysticTapeDeck_breadcrumbs
+theme: MysticTapeDeck
+region: header
+weight: -5
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

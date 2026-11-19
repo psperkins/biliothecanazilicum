@@ -1,0 +1,38 @@
+uuid: 882505c9-832d-488a-9ede-a90acde7a2da
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraphs_library_item.product_simple
+  module:
+    - entity_reference_revisions
+    - layout_builder
+    - paragraphs_library
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: paragraphs_library_item.paragraphs_library_item.product_simple
+targetEntityType: paragraphs_library_item
+bundle: paragraphs_library_item
+mode: product_simple
+content:
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+      link_rel: canonical
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  paragraphs:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

@@ -1,0 +1,40 @@
+uuid: c96a06d9-81ba-4711-adfc-5d626bc09ad7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.audio_file.field_audio_attribution
+    - field.field.media.audio_file.field_audio_subtitle
+    - field.field.media.audio_file.field_media_audio_file
+    - image.style.medium
+    - media.type.audio_file
+  module:
+    - svg_image
+id: media.audio_file.media_library
+targetEntityType: media
+bundle: audio_file
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: medium
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_audio_attribution: true
+  field_audio_subtitle: true
+  field_media_audio_file: true
+  name: true
+  uid: true

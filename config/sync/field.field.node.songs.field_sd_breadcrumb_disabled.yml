@@ -1,0 +1,23 @@
+uuid: 9905a043-019c-4f56-a8da-45a579c31928
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sd_breadcrumb_disabled
+    - node.type.songs
+id: node.songs.field_sd_breadcrumb_disabled
+field_name: field_sd_breadcrumb_disabled
+entity_type: node
+bundle: songs
+label: 'Breadcrumb Disabled'
+description: 'When checked, breadcrumbs will not be displayed for this node.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

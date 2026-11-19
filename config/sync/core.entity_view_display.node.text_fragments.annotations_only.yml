@@ -1,0 +1,64 @@
+uuid: 0991c836-f3e6-4489-95a7-0d5c3ffceccf
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.annotations_only
+    - field.field.node.text_fragments.feeds_item
+    - field.field.node.text_fragments.field_associated_audio_fragment
+    - field.field.node.text_fragments.field_associated_images
+    - field.field.node.text_fragments.field_attribution
+    - field.field.node.text_fragments.field_building_blocks
+    - field.field.node.text_fragments.field_catalog_number
+    - field.field.node.text_fragments.field_collection
+    - field.field.node.text_fragments.field_library_location
+    - field.field.node.text_fragments.field_notes
+    - field.field.node.text_fragments.field_old_url
+    - field.field.node.text_fragments.field_read_aloud
+    - field.field.node.text_fragments.field_sd_breadcrumb_automatic
+    - field.field.node.text_fragments.field_sd_breadcrumb_disabled
+    - field.field.node.text_fragments.field_sd_breadcrumb_mode
+    - field.field.node.text_fragments.field_sd_breadcrumb_segments
+    - field.field.node.text_fragments.field_subtitle
+    - field.field.node.text_fragments.field_tags
+    - field.field.node.text_fragments.layout_builder__layout
+    - node.type.text_fragments
+  module:
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.text_fragments.annotations_only
+targetEntityType: node
+bundle: text_fragments
+mode: annotations_only
+content:
+  field_notes:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  feeds_item: true
+  field_associated_audio_fragment: true
+  field_associated_images: true
+  field_attribution: true
+  field_building_blocks: true
+  field_catalog_number: true
+  field_collection: true
+  field_library_location: true
+  field_old_url: true
+  field_read_aloud: true
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true
+  field_subtitle: true
+  field_tags: true
+  layout_builder__layout: true
+  links: true

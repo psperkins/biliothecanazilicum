@@ -1,0 +1,22 @@
+uuid: d719b339-6f39-4155-a9f8-4ab83732d480
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_addendums
+    - node.type.songs
+  module:
+    - text
+id: node.songs.field_addendums
+field_name: field_addendums
+entity_type: node
+bundle: songs
+label: Addendums
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

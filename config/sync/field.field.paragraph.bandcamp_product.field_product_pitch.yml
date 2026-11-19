@@ -1,0 +1,24 @@
+uuid: 440c1744-9f91-4019-882b-2a9f221011f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_product_pitch
+    - filter.format.content_format
+    - paragraphs.paragraphs_type.bandcamp_product
+  module:
+    - text
+id: paragraph.bandcamp_product.field_product_pitch
+field_name: field_product_pitch
+entity_type: paragraph
+bundle: bandcamp_product
+label: 'Product Pitch'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - content_format
+field_type: text_long

@@ -1,0 +1,32 @@
+uuid: def8b57a-1673-4464-9a4e-633ff6385c54
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.large_inline_image.field_inline_image
+    - paragraphs.paragraphs_type.large_inline_image
+  module:
+    - media_library
+id: paragraph.large_inline_image.default
+targetEntityType: paragraph
+bundle: large_inline_image
+mode: default
+content:
+  admin_title:
+    type: string_textfield
+    weight: -10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_inline_image:
+    type: media_library_widget
+    weight: -9
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

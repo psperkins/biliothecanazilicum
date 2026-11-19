@@ -1,0 +1,176 @@
+uuid: 0d879781-940a-4b7d-bbe1-fe2e0fd0a53c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.card
+    - field.field.node.text_fragments.feeds_item
+    - field.field.node.text_fragments.field_associated_audio_fragment
+    - field.field.node.text_fragments.field_associated_images
+    - field.field.node.text_fragments.field_attribution
+    - field.field.node.text_fragments.field_building_blocks
+    - field.field.node.text_fragments.field_catalog_number
+    - field.field.node.text_fragments.field_collection
+    - field.field.node.text_fragments.field_library_location
+    - field.field.node.text_fragments.field_notes
+    - field.field.node.text_fragments.field_old_url
+    - field.field.node.text_fragments.field_read_aloud
+    - field.field.node.text_fragments.field_sd_breadcrumb_automatic
+    - field.field.node.text_fragments.field_sd_breadcrumb_disabled
+    - field.field.node.text_fragments.field_sd_breadcrumb_mode
+    - field.field.node.text_fragments.field_sd_breadcrumb_segments
+    - field.field.node.text_fragments.field_subtitle
+    - field.field.node.text_fragments.field_tags
+    - field.field.node.text_fragments.layout_builder__layout
+    - node.type.text_fragments
+  module:
+    - layout_builder
+    - layout_discovery
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          8221115a-3920-44e9-a940-370e692c0848:
+            uuid: 8221115a-3920-44e9-a940-370e692c0848
+            region: content
+            configuration:
+              id: 'field_block:node:text_fragments:field_building_blocks'
+              label: 'Building Blocks'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 4
+            additional:
+              bootstrap_styles:
+                block_style:
+                  background:
+                    background_type: null
+                  background_color:
+                    class: null
+                  background_media:
+                    image:
+                      media_id: null
+                    video:
+                      media_id: null
+                    background_options:
+                      background_position: center
+                      background_repeat: no-repeat
+                      background_attachment: not_fixed
+                      background_size: cover
+                  text_color:
+                    class: null
+                  text_alignment:
+                    class: null
+                  padding:
+                    class: _none
+                  padding_left:
+                    class: _none
+                  padding_top:
+                    class: _none
+                  padding_right:
+                    class: _none
+                  padding_bottom:
+                    class: _none
+                  margin:
+                    class: _none
+                  margin_left:
+                    class: _none
+                  margin_top:
+                    class: _none
+                  margin_right:
+                    class: _none
+                  margin_bottom:
+                    class: _none
+                  border:
+                    border_style:
+                      class: null
+                    border_width:
+                      class: _none
+                    border_color:
+                      class: null
+                    rounded_corners:
+                      class: _none
+                    border_left_style:
+                      class: null
+                    border_left_width:
+                      class: _none
+                    border_left_color:
+                      class: null
+                    border_top_style:
+                      class: null
+                    border_top_width:
+                      class: _none
+                    border_top_color:
+                      class: null
+                    border_right_style:
+                      class: null
+                    border_right_width:
+                      class: _none
+                    border_right_color:
+                      class: null
+                    border_bottom_style:
+                      class: null
+                    border_bottom_width:
+                      class: _none
+                    border_bottom_color:
+                      class: null
+                    rounded_corner_top_left:
+                      class: _none
+                    rounded_corner_top_right:
+                      class: _none
+                    rounded_corner_bottom_left:
+                      class: _none
+                    rounded_corner_bottom_right:
+                      class: _none
+                  box_shadow:
+                    class: null
+                  scroll_effects:
+                    class: null
+        third_party_settings: {  }
+id: node.text_fragments.card
+targetEntityType: node
+bundle: text_fragments
+mode: card
+content:
+  field_associated_audio_fragment:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 101
+    region: content
+hidden:
+  feeds_item: true
+  field_associated_images: true
+  field_attribution: true
+  field_building_blocks: true
+  field_catalog_number: true
+  field_collection: true
+  field_library_location: true
+  field_notes: true
+  field_old_url: true
+  field_read_aloud: true
+  field_sd_breadcrumb_automatic: true
+  field_sd_breadcrumb_disabled: true
+  field_sd_breadcrumb_mode: true
+  field_sd_breadcrumb_segments: true
+  field_subtitle: true
+  field_tags: true
+  layout_builder__layout: true
+  links: true

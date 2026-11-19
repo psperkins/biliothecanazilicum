@@ -1,0 +1,29 @@
+uuid: b92e9d96-a1be-4f9f-8301-f27ac618b352
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.text_fragments
+    - taxonomy.vocabulary.tags
+id: node.text_fragments.field_tags
+field_name: field_tags
+entity_type: node
+bundle: text_fragments
+label: Tags
+description: 'Include tags for relevant topics.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

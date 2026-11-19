@@ -1,0 +1,28 @@
+uuid: 32aea722-a09b-4320-b2fc-9111ad157811
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.building_blocks.field_elements
+    - paragraphs.paragraphs_type.building_blocks
+  module:
+    - layout_builder
+    - paragraphs
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: paragraph.building_blocks.preview
+targetEntityType: paragraph
+bundle: building_blocks
+mode: preview
+content:
+  field_elements:
+    type: paragraph_summary
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

@@ -1,0 +1,6 @@
+entity_type: node
+bundle: appendix_page
+disabled: false
+mode: system_default
+segments: {  }
+weight: 0

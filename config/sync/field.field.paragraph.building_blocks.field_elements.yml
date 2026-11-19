@@ -1,0 +1,53 @@
+uuid: bffa99d5-f504-4063-8608-aaa61469054f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_elements
+    - paragraphs.paragraphs_type.building_blocks
+    - paragraphs.paragraphs_type.image_pull_quote
+    - paragraphs.paragraphs_type.large_inline_image
+    - paragraphs.paragraphs_type.main_body
+    - paragraphs.paragraphs_type.text_pull_quote
+  module:
+    - entity_reference_revisions
+    - paragraph_blocks
+third_party_settings:
+  paragraph_blocks:
+    status: 1
+id: paragraph.building_blocks.field_elements
+field_name: field_elements
+entity_type: paragraph
+bundle: building_blocks
+label: Elements
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      main_body: main_body
+      text_pull_quote: text_pull_quote
+      image_pull_quote: image_pull_quote
+      large_inline_image: large_inline_image
+    negate: 0
+    target_bundles_drag_drop:
+      building_blocks:
+        weight: -11
+        enabled: false
+      image_pull_quote:
+        weight: -8
+        enabled: true
+      large_inline_image:
+        weight: -7
+        enabled: true
+      main_body:
+        weight: -10
+        enabled: true
+      text_pull_quote:
+        weight: -9
+        enabled: true
+field_type: entity_reference_revisions
