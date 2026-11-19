@@ -109,6 +109,10 @@ class RestExportClean extends RestExportNested {
       $results = $this->flatten($results);
     }
 
+    // Nested views are serialized as strings, so make their integer values
+    // (IDs, revisions) numbers, matching the top-level rows.
+    $results = $this->normalizeIntegers($results);
+
     if ($this->getOption('markdown')) {
       $results = $this->clean($results);
     }
@@ -133,6 +137,24 @@ class RestExportClean extends RestExportNested {
     parent::applyDisplayCacheabilityMetadata($build);
 
     return $build;
+  }
+
+  /**
+   * Recursively converts integer-only strings to integers.
+   */
+  protected function normalizeIntegers(mixed $data): mixed {
+    if (is_string($data)) {
+      return preg_match('/^(0|[1-9]\d{0,17})$/', $data) ? (int) $data : $data;
+    }
+    if (is_array($data)) {
+      return array_map(fn($value) => $this->normalizeIntegers($value), $data);
+    }
+    if (is_object($data)) {
+      foreach (get_object_vars($data) as $key => $value) {
+        $data->$key = $this->normalizeIntegers($value);
+      }
+    }
+    return $data;
   }
 
   /**
