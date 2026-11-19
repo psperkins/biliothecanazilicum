@@ -38,6 +38,11 @@ class RestExportClean extends RestExportNested {
   protected const HTML_PATTERN = '/<[a-z!\/][^>]*>|&(?:[a-z]+|#\d+|#x[0-9a-f]+);/i';
 
   /**
+   * Separator that list fields must use for multiple values in the view.
+   */
+  public const LIST_SEPARATOR = '|';
+
+  /**
    * Lazily created HTML to Markdown converter.
    */
   protected ?HtmlConverter $converter = NULL;
@@ -48,6 +53,7 @@ class RestExportClean extends RestExportNested {
   protected function defineOptions() {
     $options = parent::defineOptions();
     $options['markdown'] = ['default' => TRUE];
+    $options['list_fields'] = ['default' => []];
     return $options;
   }
 
@@ -60,6 +66,12 @@ class RestExportClean extends RestExportNested {
       'category' => 'path',
       'title' => $this->t('HTML to Markdown'),
       'value' => $this->getOption('markdown') ? $this->t('Yes') : $this->t('No'),
+    ];
+    $lists = $this->getOption('list_fields');
+    $options['list_fields'] = [
+      'category' => 'path',
+      'title' => $this->t('List fields'),
+      'value' => $lists ? implode(', ', $lists) : $this->t('None'),
     ];
   }
 
@@ -77,6 +89,15 @@ class RestExportClean extends RestExportNested {
         '#default_value' => $this->getOption('markdown'),
       ];
     }
+    if ($form_state->get('section') === 'list_fields') {
+      $form['#title'] .= $this->t('Fields output as JSON arrays');
+      $form['list_fields'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Field aliases'),
+        '#description' => $this->t('Comma-separated row aliases to output as arrays. Set each field\'s multiple-value separator to "@sep" in the view.', ['@sep' => static::LIST_SEPARATOR]),
+        '#default_value' => implode(', ', $this->getOption('list_fields')),
+      ];
+    }
   }
 
   /**
@@ -86,6 +107,10 @@ class RestExportClean extends RestExportNested {
     parent::submitOptionsForm($form, $form_state);
     if ($form_state->get('section') === 'markdown') {
       $this->setOption('markdown', (bool) $form_state->getValue('markdown'));
+    }
+    if ($form_state->get('section') === 'list_fields') {
+      $aliases = array_filter(array_map('trim', explode(',', (string) $form_state->getValue('list_fields'))));
+      $this->setOption('list_fields', array_values($aliases));
     }
   }
 
@@ -107,6 +132,15 @@ class RestExportClean extends RestExportNested {
     }
     elseif (is_array($results)) {
       $results = $this->flatten($results);
+    }
+
+    if ($lists = $this->getOption('list_fields')) {
+      $rows = is_object($results) && isset($results->rows) ? $results->rows : $results;
+      if (is_array($rows)) {
+        foreach ($rows as $row) {
+          $this->splitLists($row, $lists);
+        }
+      }
     }
 
     // Nested views are serialized as strings, so make their integer values
@@ -137,6 +171,27 @@ class RestExportClean extends RestExportNested {
     parent::applyDisplayCacheabilityMetadata($build);
 
     return $build;
+  }
+
+  /**
+   * Turns the configured multi-value fields of a row into arrays.
+   */
+  protected function splitLists(object $row, array $aliases): void {
+    foreach ($aliases as $alias) {
+      if (!property_exists($row, $alias)) {
+        continue;
+      }
+      $value = $row->$alias;
+      if ($value === NULL || $value === '') {
+        $row->$alias = [];
+      }
+      elseif (is_string($value)) {
+        $row->$alias = array_values(array_filter(array_map('trim', explode(static::LIST_SEPARATOR, $value)), 'strlen'));
+      }
+      elseif (!is_array($value)) {
+        $row->$alias = [$value];
+      }
+    }
   }
 
   /**
@@ -196,6 +251,8 @@ class RestExportClean extends RestExportNested {
     // a footnote "*" becomes "\*". Real formatting is never escaped, so drop
     // the backslashes to keep the text exactly as the author wrote it.
     $markdown = preg_replace('/\\\\([\\\\`*_{}\[\]()#+\-.!|<>~])/', '$1', $markdown);
+    // Markdown autolinks (<https://...>) become plain URLs.
+    $markdown = preg_replace('#<(https?://[^\s<>]+)>#', '$1', $markdown);
     // Non-breaking spaces become normal spaces.
     $markdown = str_replace("\u{00A0}", ' ', $markdown);
     // Drop headings with no text, e.g. from <h3>&nbsp;</h3>.

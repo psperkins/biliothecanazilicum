@@ -5,3 +5,9 @@ views.display.rest_export_clean:
     markdown:
       type: boolean
       label: 'Convert HTML fields to Markdown'
+    list_fields:
+      type: sequence
+      label: 'Fields output as JSON arrays'
+      sequence:
+        type: string
+        label: 'Field alias'
