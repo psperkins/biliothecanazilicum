@@ -2,7 +2,7 @@
 
 Keeps the AnythingLLM workspace **The Librarian** in step with the canon published on the Drupal site.
 
-It reads `/izizop/songs`, `/izizop/fragments` and `/izizop/albums`, turns every song, annotation, text fragment and album (IZIZOP vessel, with its description, tracklist and Bandcamp text) into its own document with a citation header (title, type, song/vessel or collection, source URL), and:
+It reads `/izizop/songs`, `/izizop/fragments`, `/izizop/albums`, `/izizop/collections` and `/izizop/headings`, turns every song, annotation, text fragment, album (IZIZOP vessel, with its description, tracklist and Bandcamp text), collection (description and contents grouped by heading), heading (tag) and library section into its own document with a citation header (title, type, song/vessel or collection, source URL), and adds a `Placement` line (e.g. `The Nazilic Concordance › Glossa Nazilicum`) to each fragment's header. It then:
 
 - uploads and embeds new or changed items,
 - removes items that were deleted, unpublished or trashed on the site,

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Sync Bibliotheca Nazilicum canon from the Drupal API into AnythingLLM.
 
-Reads the canon endpoints (izizop/songs, izizop/fragments, izizop/albums),
-turns every song, annotation, text fragment and album into its own document with a citation header,
+Reads the canon endpoints (izizop/songs, izizop/fragments, izizop/albums,
+izizop/collections, izizop/headings), turns every song, annotation, text
+fragment, album, collection, heading and library section into its own document with a citation header,
 and keeps an AnythingLLM workspace in step: new and changed items are
 uploaded and embedded, removed items are taken out. A local SQLite file
 records what was synced and keeps every earlier version of each document,
@@ -156,10 +157,136 @@ def section(title: str, text) -> str:
     return f"\n\n## {title}\n\n{text}" if text else ""
 
 
+def clean_title(value) -> str:
+    return " ".join(str(value or "").split())
+
+
+def split_list(value) -> list[str]:
+    if isinstance(value, list):
+        return [clean_title(v) for v in value if clean_title(v)]
+    return [clean_title(v) for v in str(value or "").split("|") if clean_title(v)]
+
+
+def item_line(item: dict, with_collection: str | None = None) -> str:
+    kind = clean_title(item.get("type"))
+    kind = kind[:-1] if kind.endswith("s") else kind
+    extra = [kind] + ([clean_title(item["catalog_number"])] if item.get("catalog_number") else [])
+    where = f" — {with_collection}" if with_collection else ""
+    return f"- {clean_title(item.get('title'))} ({', '.join(extra)}){where}"
+
+
+def build_arrangement(collections: list[dict], headings: list[dict], fragments: list[dict],
+                      docs: dict[str, dict]) -> dict[str, list[str]]:
+    """Add collection, heading and library section documents.
+
+    Returns {item uuid: ["Collection › Heading", …]} so item headers can say
+    where each item sits in the Library's arrangement.
+    """
+    tag_order = {clean_title(h["title"]): i for i, h in enumerate(headings) if h.get("kind") == "tags"}
+    placement: dict[str, list[str]] = {}
+    by_heading: dict[str, dict[str, list[dict]]] = {}
+    shelved_collections: dict[str, list[str]] = {}
+
+    for coll in collections:
+        name = clean_title(coll["title"])
+        contents = coll.get("contents") or []
+        sections = split_list(coll.get("library_section"))
+        for sec in sections:
+            shelved_collections.setdefault(sec, []).append(name)
+
+        groups: dict[str, list[dict]] = {}
+        kinds = {clean_title(i.get("type")) for i in contents}
+        for item in contents:
+            item_headings = split_list(item.get("headings"))
+            for h in item_headings:
+                placement.setdefault(item["uuid"], []).append(f"{name} › {h}")
+                by_heading.setdefault(h, {}).setdefault(name, []).append(item)
+            keys = item_headings or ([clean_title(item.get("type"))] if len(kinds) > 1 else [""])
+            for k in keys:
+                groups.setdefault(k, []).append(item)
+        ordered = sorted(groups, key=lambda k: (k not in tag_order, tag_order.get(k, 0), k))
+
+        text = header([
+            ("Title", name),
+            ("Type", "Collection (Bibliotheca Nazilicum)"),
+            ("Library section", sections),
+            ("Holdings", len(contents) or None),
+            ("Headings", [k for k in ordered if k in tag_order]),
+            ("Source", coll.get("url")),
+        ])
+        text += section("Description", coll.get("description"))
+        if contents:
+            body = []
+            for k in ordered:
+                if k:
+                    body.append(f"### {k}")
+                body.extend(item_line(i) for i in groups[k])
+                body.append("")
+            text += section("Contents", "\n".join(body))
+        docs[f"collection:{coll['uuid']}"] = {
+            "uuid": coll["uuid"], "type": "collection", "title": name,
+            "url": coll.get("url"), "changed": coll.get("changed"),
+            "revision": None, "text": text,
+        }
+
+    shelved_items: dict[str, dict[str, list[str]]] = {}
+    for frag in fragments:
+        for sec in split_list(frag.get("library_locations")):
+            shelved_items.setdefault(sec, {}).setdefault(
+                clean_title(frag.get("collection")) or "Uncollected", []).append(clean_title(frag["title"]))
+
+    for h in headings:
+        name = clean_title(h["title"])
+        if h.get("kind") == "tags":
+            holdings = by_heading.get(name, {})
+            text = header([
+                ("Title", name),
+                ("Type", "Heading (a contextual division used to arrange the Library's collections)"),
+                ("Used in collections", list(holdings)),
+                ("Holdings", sum(len(v) for v in holdings.values()) or None),
+                ("Source", h.get("url")),
+            ])
+            text += section("Description", h.get("description"))
+            body = []
+            for coll_name, items in holdings.items():
+                body.append(f"### {coll_name}")
+                body.extend(item_line(i) for i in items)
+                body.append("")
+            text += section("Holdings", "\n".join(body))
+            key, kind = f"heading:{h['uuid']}", "heading"
+        else:
+            colls = shelved_collections.get(name, [])
+            items = shelved_items.get(name, {})
+            text = header([
+                ("Title", name),
+                ("Type", "Library section (a room or wing of the Bibliotheca Nazilicum)"),
+                ("Collections shelved here", colls),
+                ("Source", h.get("url")),
+            ])
+            text += section("Description", h.get("description"))
+            text += section("Collections shelved here", "\n".join(f"- {c}" for c in colls))
+            body = []
+            for coll_name, titles in items.items():
+                body.append(f"### {coll_name}")
+                body.extend(f"- {t}" for t in titles)
+                body.append("")
+            text += section("Items shelved here", "\n".join(body))
+            key, kind = f"section:{h['uuid']}", "section"
+        docs[key] = {
+            "uuid": h["uuid"], "type": kind, "title": name,
+            "url": h.get("url"), "changed": h.get("changed"),
+            "revision": None, "text": text,
+        }
+    return placement
+
+
 def build_documents(songs: list[dict], fragments: list[dict],
-                    albums: list[dict] | None = None) -> dict[str, dict]:
+                    albums: list[dict] | None = None,
+                    collections: list[dict] | None = None,
+                    headings: list[dict] | None = None) -> dict[str, dict]:
     """Return {key: {uuid, type, title, url, changed, revision, text}}."""
     docs: dict[str, dict] = {}
+    placement = build_arrangement(collections or [], headings or [], fragments, docs)
 
     for album in albums or []:
         tracks = album.get("tracks") or []
@@ -227,6 +354,7 @@ def build_documents(songs: list[dict], fragments: list[dict],
             ("Collection", frag.get("collection")),
             ("Library location", frag.get("library_locations")),
             ("Tags", frag.get("tags")),
+            ("Placement", placement.get(frag["uuid"])),
             ("Source", frag.get("url")),
         ])
         text += "\n\n" + (frag.get("body") or "").strip()
@@ -275,14 +403,21 @@ def fetch_canon(cfg: dict) -> tuple[dict[str, dict], set[str]]:
     songs = http_json(f"{base}/izizop/songs?_format=json")
     fragments = http_json(f"{base}/izizop/fragments?_format=json")
     skipped: set[str] = set()
-    try:
-        albums = http_json(f"{base}/izizop/albums?_format=json")
-    except SystemExit as err:
-        if "HTTP 404" not in str(err):
-            raise
-        print("  izizop/albums is not on this site yet; leaving albums as they are.")
-        albums, skipped = [], {"album"}
-    docs = build_documents(songs, fragments, albums)
+
+    def optional(path: str, types: set[str]) -> list[dict]:
+        try:
+            return http_json(f"{base}/izizop/{path}?_format=json")
+        except SystemExit as err:
+            if "HTTP 404" not in str(err):
+                raise
+            print(f"  izizop/{path} is not on this site yet; skipping it (nothing synced from it is removed).")
+            skipped.update(types)
+            return []
+
+    albums = optional("albums", {"album"})
+    collections = optional("collections", {"collection"})
+    headings = optional("headings", {"heading", "section"})
+    docs = build_documents(songs, fragments, albums, collections, headings)
     counts = {}
     for d in docs.values():
         counts[d["type"]] = counts.get(d["type"], 0) + 1
