@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Sync Bibliotheca Nazilicum canon from the Drupal API into AnythingLLM.
 
-Reads the canon endpoints (izizop/songs, izizop/fragments), turns every song,
-annotation and text fragment into its own document with a citation header,
+Reads the canon endpoints (izizop/songs, izizop/fragments, izizop/albums),
+turns every song, annotation, text fragment and album into its own document with a citation header,
 and keeps an AnythingLLM workspace in step: new and changed items are
 uploaded and embedded, removed items are taken out. A local SQLite file
 records what was synced and keeps every earlier version of each document,
@@ -156,9 +156,31 @@ def section(title: str, text) -> str:
     return f"\n\n## {title}\n\n{text}" if text else ""
 
 
-def build_documents(songs: list[dict], fragments: list[dict]) -> dict[str, dict]:
+def build_documents(songs: list[dict], fragments: list[dict],
+                    albums: list[dict] | None = None) -> dict[str, dict]:
     """Return {key: {uuid, type, title, url, changed, revision, text}}."""
     docs: dict[str, dict] = {}
+
+    for album in albums or []:
+        tracks = album.get("tracks") or []
+        text = header([
+            ("Title", album["title"]),
+            ("Type", "Album (IZIZOP vessel)"),
+            ("Collection", album.get("collection")),
+            ("Year of release", album.get("year")),
+            ("Tracks", len(tracks) or None),
+            ("Source", album.get("url")),
+            ("Bandcamp", album.get("bandcamp_url")),
+        ])
+        text += section("Description", album.get("description"))
+        text += section("Tracklist", "\n".join(
+            f"{t.get('track')}. {(t.get('title') or '').strip()}" for t in tracks))
+        text += section("Bandcamp pitch", album.get("bandcamp_pitch"))
+        docs[f"album:{album['uuid']}"] = {
+            "uuid": album["uuid"], "type": "album", "title": album["title"],
+            "url": album.get("url"), "changed": album.get("changed"),
+            "revision": None, "text": text,
+        }
 
     for song in songs:
         notes = song.get("notes") or []
@@ -247,30 +269,38 @@ def now() -> str:
 # Commands
 # --------------------------------------------------------------------------
 
-def fetch_canon(cfg: dict) -> dict[str, dict]:
+def fetch_canon(cfg: dict) -> tuple[dict[str, dict], set[str]]:
     base = cfg["DRUPAL_BASE_URL"]
     print(f"Reading canon from {base} …")
     songs = http_json(f"{base}/izizop/songs?_format=json")
     fragments = http_json(f"{base}/izizop/fragments?_format=json")
-    docs = build_documents(songs, fragments)
+    skipped: set[str] = set()
+    try:
+        albums = http_json(f"{base}/izizop/albums?_format=json")
+    except SystemExit as err:
+        if "HTTP 404" not in str(err):
+            raise
+        print("  izizop/albums is not on this site yet; leaving albums as they are.")
+        albums, skipped = [], {"album"}
+    docs = build_documents(songs, fragments, albums)
     counts = {}
     for d in docs.values():
         counts[d["type"]] = counts.get(d["type"], 0) + 1
     print("  " + ", ".join(f"{n} {t}s" for t, n in sorted(counts.items())))
-    return docs
+    return docs, skipped
 
 
-def plan(db: sqlite3.Connection, docs: dict[str, dict]):
+def plan(db: sqlite3.Connection, docs: dict[str, dict], skipped: set[str] = frozenset()):
     stored = {row["key"]: row for row in db.execute("SELECT * FROM docs")}
     new = [k for k in docs if k not in stored]
     changed = [k for k in docs if k in stored and stored[k]["hash"] != docs[k]["hash"]]
-    removed = [k for k in stored if k not in docs]
+    removed = [k for k in stored if k not in docs and stored[k]["type"] not in skipped]
     return stored, new, changed, removed
 
 
 def cmd_sync(cfg: dict, dry_run: bool, rebuild: bool):
     db = open_db()
-    docs = fetch_canon(cfg)
+    docs, skipped = fetch_canon(cfg)
     llm = None if dry_run else AnythingLLM(cfg["ANYTHINGLLM_URL"], cfg["ANYTHINGLLM_API_KEY"],
                                            cfg["ANYTHINGLLM_WORKSPACE"])
     if llm:
@@ -286,7 +316,7 @@ def cmd_sync(cfg: dict, dry_run: bool, rebuild: bool):
             db.execute("DELETE FROM docs")
             db.commit()
 
-    stored, new, changed, removed = plan(db, docs)
+    stored, new, changed, removed = plan(db, docs, skipped)
     print(f"Plan: {len(new)} new, {len(changed)} changed, {len(removed)} removed, "
           f"{len(docs) - len(new) - len(changed)} unchanged.")
     for label, keys, source in (("new", new, docs), ("changed", changed, docs), ("removed", removed, stored)):
