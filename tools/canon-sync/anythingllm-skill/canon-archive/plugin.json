@@ -1,0 +1,77 @@
+{
+  "active": true,
+  "hubId": "canon-archive",
+  "name": "Canon archive",
+  "schema": "skill-1.0.0",
+  "version": "1.0.0",
+  "description": "Manage the writing archive: start a new draft as a .txt file, revise a draft, promote a file from drafts to pending, publish a file from pending into canon (it is then synced into this workspace), retract a published manuscript from the workspace, list the files at each stage, or read one. Every action is recorded in the ledger. Use this whenever the user says draft, revise, promote, publish, audit, or asks what is in drafts, pending or canon.",
+  "author": "drupalmtd",
+  "license": "MIT",
+  "setup_args": {
+    "CANON_SYNC_DIR": {
+      "type": "string",
+      "required": false,
+      "input": { "type": "text", "default": "/Users/patrickperkins/sites/drupalmtd/tools/canon-sync", "placeholder": "Folder holding canon_sync.py", "hint": "Folder holding canon_sync.py and source/" },
+      "value": "/Users/patrickperkins/sites/drupalmtd/tools/canon-sync"
+    },
+    "PYTHON": {
+      "type": "string",
+      "required": false,
+      "input": { "type": "text", "default": "/opt/homebrew/bin/python3", "placeholder": "/opt/homebrew/bin/python3", "hint": "Full path to python3" },
+      "value": "/opt/homebrew/bin/python3"
+    }
+  },
+  "examples": [
+    {
+      "prompt": "Start a new draft of this called The Oculus Draconis: Apollonius travels to the mountains where the pepper trees grow...",
+      "call": "{\"action\": \"draft\", \"title\": \"The Oculus Draconis\", \"text\": \"Apollonius travels to the mountains where the pepper trees grow...\"}"
+    },
+    {
+      "prompt": "Replace the oculus draconis draft with this version: ...",
+      "call": "{\"action\": \"revise\", \"file\": \"the-oculus-draconis.txt\", \"text\": \"...\"}"
+    },
+    {
+      "prompt": "Promote the oculus draconis draft",
+      "call": "{\"action\": \"promote\", \"file\": \"the-oculus-draconis.txt\"}"
+    },
+    {
+      "prompt": "Publish the oculus draconis to canon",
+      "call": "{\"action\": \"publish\", \"file\": \"the-oculus-draconis.txt\"}"
+    },
+    {
+      "prompt": "Retract the oculus draconis from canon",
+      "call": "{\"action\": \"retract\", \"file\": \"the-oculus-draconis.txt\"}"
+    },
+    {
+      "prompt": "What's waiting in pending?",
+      "call": "{\"action\": \"list\"}"
+    },
+    {
+      "prompt": "Show me the pronunciation guide draft",
+      "call": "{\"action\": \"read\", \"file\": \"nazili_pronunciation_guide.txt\"}"
+    }
+  ],
+  "entrypoint": {
+    "file": "handler.js",
+    "params": {
+      "action": {
+        "type": "string",
+        "enum": ["draft", "revise", "promote", "publish", "retract", "list", "read"],
+        "description": "draft = create a new draft file; revise = replace the text of an existing draft or pending file; promote = move a file from drafts to pending (only); publish = move a file from pending into canon, making it authoritative, then sync it (only when the user says publish); retract = take a published manuscript out of the workspace (only when the user says retract); list = show files at every stage; read = return a file's text. Call promote or publish once per user request."
+      },
+      "title": {
+        "type": "string",
+        "description": "Title of a new draft (action draft). The file name is made from it."
+      },
+      "text": {
+        "type": "string",
+        "description": "The full text to save, word for word (actions draft and revise). Do not summarize."
+      },
+      "file": {
+        "type": "string",
+        "description": "File name such as the-oculus-draconis.txt (actions revise, promote, publish, retract, read). Use list to find names."
+      }
+    }
+  },
+  "imported": true
+}

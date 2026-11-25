@@ -45,4 +45,12 @@ $RECYCLE.BIN/
 # Canon sync tool: secrets and local state
 /tools/canon-sync/.env
 /tools/canon-sync/*.sqlite
+/tools/canon-sync/*.sqlite-*
 /tools/canon-sync/__pycache__/
+
+# Writing archive: drafts, pending, canon and the ledger are content, never code.
+# The script and the AnythingLLM skill create these folders when they need them.
+/tools/canon-sync/source/
+
+# Librarian prompts and other canon writing kept at the project root.
+/librarian-system-prompt*.txt

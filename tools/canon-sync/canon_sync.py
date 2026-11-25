@@ -15,6 +15,10 @@ Usage:
   python3 canon_sync.py --rebuild    remove everything synced and start over
   python3 canon_sync.py status       summary of what is synced
   python3 canon_sync.py changes      recent canon changes recorded locally
+  python3 canon_sync.py gc           clear ingested files out of source/ (--dry-run to preview)
+  python3 canon_sync.py retract X    take ingested manuscript X out of AnythingLLM
+
+Text files in source/canon/ are synced too, as manuscripts (see README).
 
 Only the Python standard library is used.
 """
@@ -36,6 +40,9 @@ HERE = Path(__file__).resolve().parent
 DB_PATH = HERE / "canon_sync.sqlite"
 FOLDER = "bibliotheca-canon"
 BATCH = 20
+SOURCE = HERE / "source"
+STAGES = ("drafts", "pending", "canon", "ledger")
+TEXT_SUFFIXES = {".txt", ".md"}
 
 
 # --------------------------------------------------------------------------
@@ -371,6 +378,65 @@ def build_documents(songs: list[dict], fragments: list[dict],
 
 
 # --------------------------------------------------------------------------
+# Writing archive (source/drafts → pending → canon)
+# --------------------------------------------------------------------------
+
+def ensure_stages():
+    for stage in STAGES:
+        (SOURCE / stage).mkdir(parents=True, exist_ok=True)
+
+
+def text_files(stage: str) -> list[Path]:
+    folder = SOURCE / stage
+    if not folder.is_dir():
+        return []
+    return sorted(p for p in folder.iterdir()
+                  if p.is_file() and not p.name.startswith(".") and p.suffix.lower() in TEXT_SUFFIXES)
+
+
+def read_text(path: Path) -> str:
+    raw = path.read_bytes()
+    try:
+        return raw.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        return raw.decode("cp1252", errors="replace")
+
+
+def manuscript_doc(path: Path) -> dict:
+    """Turn a file in source/canon into a document. A first line 'Title: …' sets the title."""
+    body = read_text(path).strip()
+    first, _, rest = body.partition("\n")
+    if first.lower().startswith("title:"):
+        title, body = first.split(":", 1)[1].strip(), rest.strip()
+    else:
+        title = path.stem.replace("-", " ").replace("_", " ").strip()
+        if title.islower():
+            title = title.title()
+    text = header([
+        ("Title", title),
+        ("Type", "Manuscript (writing archive)"),
+        ("Source file", f"canon/{path.name}"),
+    ]) + "\n\n" + body
+    changed = datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat(timespec="seconds")
+    return {"uuid": None, "type": "manuscript", "title": title, "url": None, "changed": changed,
+            "revision": None, "text": text, "hash": hashlib.sha256(text.encode()).hexdigest()}
+
+
+def build_manuscripts(db: sqlite3.Connection) -> dict[str, dict]:
+    """Files in source/canon, plus manuscripts already ingested whose files were cleared by gc."""
+    docs = {f"manuscript:{p.name}": manuscript_doc(p) for p in text_files("canon")}
+    for row in db.execute("SELECT * FROM docs WHERE type = 'manuscript'"):
+        docs.setdefault(row["key"], dict(row))
+    return docs
+
+
+def ledger(event: str, name: str, detail: str = ""):
+    (SOURCE / "ledger").mkdir(parents=True, exist_ok=True)
+    with open(SOURCE / "ledger" / "ingest.log", "a", encoding="utf-8") as log:
+        log.write(f"{now()}  {event:9} {name}{'  ' + detail if detail else ''}\n")
+
+
+# --------------------------------------------------------------------------
 # Local state
 # --------------------------------------------------------------------------
 
@@ -436,6 +502,10 @@ def plan(db: sqlite3.Connection, docs: dict[str, dict], skipped: set[str] = froz
 def cmd_sync(cfg: dict, dry_run: bool, rebuild: bool):
     db = open_db()
     docs, skipped = fetch_canon(cfg)
+    manuscripts = build_manuscripts(db)
+    waiting = len(text_files("canon"))
+    print(f"  {len(manuscripts)} manuscripts ({waiting} file{'s' * (waiting != 1)} in source/canon)")
+    docs.update(manuscripts)
     llm = None if dry_run else AnythingLLM(cfg["ANYTHINGLLM_URL"], cfg["ANYTHINGLLM_API_KEY"],
                                            cfg["ANYTHINGLLM_WORKSPACE"])
     if llm:
@@ -510,7 +580,75 @@ def cmd_sync(cfg: dict, dry_run: bool, rebuild: bool):
                    (key, old["title"], old["revision"], old["changed"], old["text"], stamp))
         db.execute("DELETE FROM docs WHERE key = ?", (key,))
     db.commit()
+    for key in new + changed:
+        if docs[key]["type"] == "manuscript" and (SOURCE / "canon" / key.split(":", 1)[1]).exists():
+            ledger("ingested", f"canon/{key.split(':', 1)[1]}",
+                   f"\"{docs[key]['title']}\" sha256:{docs[key]['hash'][:12]}")
     print("Done. Canon is up to date.")
+    if any(docs[k]["type"] == "manuscript" for k in new + changed):
+        print("Run 'python3 canon_sync.py gc' to clear ingested files from source/.")
+
+
+def cmd_gc(dry_run: bool):
+    """Delete ingested files from source/canon, and their earlier versions in drafts/ and pending/."""
+    db = open_db()
+    ensure_stages()
+    stored = {r["key"]: r for r in db.execute("SELECT key, hash FROM docs WHERE type = 'manuscript'")}
+    clear, keep = [], []
+    for path in text_files("canon"):
+        row = stored.get(f"manuscript:{path.name}")
+        if row and row["hash"] == manuscript_doc(path)["hash"]:
+            clear.append(path)
+        else:
+            keep.append((path, "changed since it was ingested" if row else "not ingested yet"))
+    stems = {Path(k.split(":", 1)[1]).stem.lower() for k in stored}
+    for stage in ("pending", "drafts"):
+        clear += [p for p in text_files(stage) if p.stem.lower() in stems]
+
+    if not clear and not keep:
+        print("source/ is already clear.")
+        return
+    for path in clear:
+        print(f"  {'would clear' if dry_run else 'clear'}  {path.relative_to(SOURCE)}")
+    for path, why in keep:
+        print(f"  keep         {path.relative_to(SOURCE)}  ({why}; run sync first)")
+    if dry_run or not clear:
+        return
+    for path in clear:
+        path.unlink()
+        ledger("cleared", str(path.relative_to(SOURCE)))
+    print(f"Cleared {len(clear)} file{'s' * (len(clear) != 1)}. Their text stays in AnythingLLM "
+          f"and in {DB_PATH.name}.")
+
+
+def cmd_retract(cfg: dict, name: str, dry_run: bool):
+    """Take an ingested manuscript out of AnythingLLM (its file may already be cleared)."""
+    db = open_db()
+    key = f"manuscript:{Path(name).name}"
+    row = db.execute("SELECT * FROM docs WHERE key = ?", (key,)).fetchone()
+    if not row:
+        names = [r["key"].split(":", 1)[1] for r in db.execute(
+            "SELECT key FROM docs WHERE type = 'manuscript' ORDER BY key")]
+        raise SystemExit(f"No ingested manuscript named '{Path(name).name}'. Ingested: "
+                         + (", ".join(names) or "none"))
+    if (SOURCE / "canon" / Path(name).name).exists():
+        raise SystemExit(f"source/canon/{Path(name).name} still exists, so the next sync would add it "
+                         "back. Move or delete it first.")
+    print(f"{'Would retract' if dry_run else 'Retracting'} \"{row['title']}\" ({row['location']})")
+    if dry_run:
+        return
+    llm = AnythingLLM(cfg["ANYTHINGLLM_URL"], cfg["ANYTHINGLLM_API_KEY"], cfg["ANYTHINGLLM_WORKSPACE"])
+    llm.check()
+    if row["location"]:
+        llm.embed([], [row["location"]])
+        llm.remove_files([row["location"]])
+    db.execute("INSERT INTO history (key, title, event, revision, changed, text, recorded_at) "
+               "VALUES (?, ?, 'removed', ?, ?, ?, ?)",
+               (key, row["title"], row["revision"], row["changed"], row["text"], now()))
+    db.execute("DELETE FROM docs WHERE key = ?", (key,))
+    db.commit()
+    ledger("retracted", f"canon/{Path(name).name}", f"\"{row['title']}\"")
+    print("Done.")
 
 
 def cmd_status(cfg: dict):
@@ -537,7 +675,9 @@ def cmd_changes(limit: int):
 
 def main():
     parser = argparse.ArgumentParser(description="Sync Drupal canon into AnythingLLM.")
-    parser.add_argument("command", nargs="?", default="sync", choices=["sync", "status", "changes"])
+    parser.add_argument("command", nargs="?", default="sync",
+                        choices=["sync", "status", "changes", "gc", "retract"])
+    parser.add_argument("name", nargs="?", help="file name for 'retract' (e.g. my-story.txt)")
     parser.add_argument("--dry-run", action="store_true", help="show the plan without changing anything")
     parser.add_argument("--rebuild", action="store_true", help="remove all synced documents and re-add them")
     parser.add_argument("--limit", type=int, default=30, help="rows to show for 'changes'")
@@ -547,6 +687,12 @@ def main():
         cmd_status(cfg)
     elif args.command == "changes":
         cmd_changes(args.limit)
+    elif args.command == "gc":
+        cmd_gc(args.dry_run)
+    elif args.command == "retract":
+        if not args.name:
+            parser.error("retract needs a file name, e.g. retract my-story.txt")
+        cmd_retract(cfg, args.name, args.dry_run)
     else:
         cmd_sync(cfg, args.dry_run, args.rebuild)
 
