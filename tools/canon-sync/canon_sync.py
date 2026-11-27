@@ -403,11 +403,16 @@ def read_text(path: Path) -> str:
 
 
 def manuscript_doc(path: Path) -> dict:
-    """Turn a file in source/canon into a document. A first line 'Title: …' sets the title."""
+    """Turn a file in source/canon into a document.
+
+    A first line '# Heading' (Markdown) or 'Title: …' sets the title; otherwise the file name does.
+    """
     body = read_text(path).strip()
     first, _, rest = body.partition("\n")
     if first.lower().startswith("title:"):
         title, body = first.split(":", 1)[1].strip(), rest.strip()
+    elif first.startswith("# ") and first[2:].strip():
+        title, body = first[2:].strip(), rest.strip()
     else:
         title = path.stem.replace("-", " ").replace("_", " ").strip()
         if title.islower():
@@ -624,15 +629,23 @@ def cmd_gc(dry_run: bool):
 def cmd_retract(cfg: dict, name: str, dry_run: bool):
     """Take an ingested manuscript out of AnythingLLM (its file may already be cleared)."""
     db = open_db()
-    key = f"manuscript:{Path(name).name}"
-    row = db.execute("SELECT * FROM docs WHERE key = ?", (key,)).fetchone()
-    if not row:
-        names = [r["key"].split(":", 1)[1] for r in db.execute(
-            "SELECT key FROM docs WHERE type = 'manuscript' ORDER BY key")]
-        raise SystemExit(f"No ingested manuscript named '{Path(name).name}'. Ingested: "
-                         + (", ".join(names) or "none"))
-    if (SOURCE / "canon" / Path(name).name).exists():
-        raise SystemExit(f"source/canon/{Path(name).name} still exists, so the next sync would add it "
+    rows = db.execute("SELECT * FROM docs WHERE type = 'manuscript' ORDER BY key").fetchall()
+    names = [r["key"].split(":", 1)[1] for r in rows]
+    wanted = Path(name).name
+    # Exact file name first; otherwise match the name without its extension (.md or .txt).
+    loose = Path(wanted).stem.lower() if Path(wanted).suffix.lower() in TEXT_SUFFIXES else wanted.lower()
+    matches = [r for r in rows if r["key"] == f"manuscript:{wanted}"] or \
+              [r for r in rows if Path(r["key"].split(":", 1)[1]).stem.lower() == loose]
+    if not matches:
+        raise SystemExit(f"No ingested manuscript named '{wanted}'. Ingested: " + (", ".join(names) or "none"))
+    if len(matches) > 1:
+        raise SystemExit(f"'{wanted}' matches more than one manuscript: "
+                         + ", ".join(m["key"].split(":", 1)[1] for m in matches) + ". Give the full file name.")
+    row = matches[0]
+    key = row["key"]
+    name = key.split(":", 1)[1]
+    if (SOURCE / "canon" / name).exists():
+        raise SystemExit(f"source/canon/{name} still exists, so the next sync would add it "
                          "back. Move or delete it first.")
     print(f"{'Would retract' if dry_run else 'Retracting'} \"{row['title']}\" ({row['location']})")
     if dry_run:
@@ -677,7 +690,7 @@ def main():
     parser = argparse.ArgumentParser(description="Sync Drupal canon into AnythingLLM.")
     parser.add_argument("command", nargs="?", default="sync",
                         choices=["sync", "status", "changes", "gc", "retract"])
-    parser.add_argument("name", nargs="?", help="file name for 'retract' (e.g. my-story.txt)")
+    parser.add_argument("name", nargs="?", help="file name for 'retract' (e.g. my-story.md)")
     parser.add_argument("--dry-run", action="store_true", help="show the plan without changing anything")
     parser.add_argument("--rebuild", action="store_true", help="remove all synced documents and re-add them")
     parser.add_argument("--limit", type=int, default=30, help="rows to show for 'changes'")
@@ -691,7 +704,7 @@ def main():
         cmd_gc(args.dry_run)
     elif args.command == "retract":
         if not args.name:
-            parser.error("retract needs a file name, e.g. retract my-story.txt")
+            parser.error("retract needs a file name, e.g. retract my-story.md")
         cmd_retract(cfg, args.name, args.dry_run)
     else:
         cmd_sync(cfg, args.dry_run, args.rebuild)

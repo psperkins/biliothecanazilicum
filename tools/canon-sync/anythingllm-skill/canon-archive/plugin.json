@@ -4,21 +4,42 @@
   "name": "Canon archive",
   "schema": "skill-1.0.0",
   "version": "1.0.0",
-  "description": "Manage the writing archive: start a new draft as a .txt file, revise a draft, promote a file from drafts to pending, publish a file from pending into canon (it is then synced into this workspace), retract a published manuscript from the workspace, list the files at each stage, or read one. Every action is recorded in the ledger. Use this whenever the user says draft, revise, promote, publish, audit, or asks what is in drafts, pending or canon.",
+  "description": "Manage the writing archive: start a new draft as a Markdown (.md) file, revise a draft, open a file in Obsidian to edit it, promote a file from drafts to pending, publish a file from pending into canon (it is then synced into this workspace), retract a published manuscript from the workspace, list the files at each stage, read one, or recall a published canon entry by title. Every action is recorded in the ledger. Use this whenever the user says draft, revise, edit, promote, publish, audit, or asks what is in drafts, pending or canon.",
   "author": "drupalmtd",
   "license": "MIT",
   "setup_args": {
     "CANON_SYNC_DIR": {
       "type": "string",
       "required": false,
-      "input": { "type": "text", "default": "/Users/patrickperkins/sites/drupalmtd/tools/canon-sync", "placeholder": "Folder holding canon_sync.py", "hint": "Folder holding canon_sync.py and source/" },
+      "input": {
+        "type": "text",
+        "default": "/Users/patrickperkins/sites/drupalmtd/tools/canon-sync",
+        "placeholder": "Folder holding canon_sync.py",
+        "hint": "Folder holding canon_sync.py and source/"
+      },
       "value": "/Users/patrickperkins/sites/drupalmtd/tools/canon-sync"
     },
     "PYTHON": {
       "type": "string",
       "required": false,
-      "input": { "type": "text", "default": "/opt/homebrew/bin/python3", "placeholder": "/opt/homebrew/bin/python3", "hint": "Full path to python3" },
+      "input": {
+        "type": "text",
+        "default": "/opt/homebrew/bin/python3",
+        "placeholder": "/opt/homebrew/bin/python3",
+        "hint": "Full path to python3"
+      },
       "value": "/opt/homebrew/bin/python3"
+    },
+    "OBSIDIAN_VAULT": {
+      "type": "string",
+      "required": false,
+      "input": {
+        "type": "text",
+        "default": "source",
+        "placeholder": "source",
+        "hint": "Obsidian vault name for the source folder (leave empty to let Obsidian pick by path)"
+      },
+      "value": "source"
     }
   },
   "examples": [
@@ -27,28 +48,40 @@
       "call": "{\"action\": \"draft\", \"title\": \"The Oculus Draconis\", \"text\": \"Apollonius travels to the mountains where the pepper trees grow...\"}"
     },
     {
+      "prompt": "Draft to-bend-the-law.md and include the editorializing",
+      "call": "{\"action\": \"draft\", \"title\": \"To Bend The Law\", \"use_last_reply\": true}"
+    },
+    {
       "prompt": "Replace the oculus draconis draft with this version: ...",
-      "call": "{\"action\": \"revise\", \"file\": \"the-oculus-draconis.txt\", \"text\": \"...\"}"
+      "call": "{\"action\": \"revise\", \"file\": \"the-oculus-draconis.md\", \"text\": \"...\"}"
+    },
+    {
+      "prompt": "Open the oculus draconis draft so I can edit it",
+      "call": "{\"action\": \"edit\", \"file\": \"the-oculus-draconis.md\"}"
     },
     {
       "prompt": "Promote the oculus draconis draft",
-      "call": "{\"action\": \"promote\", \"file\": \"the-oculus-draconis.txt\"}"
+      "call": "{\"action\": \"promote\", \"file\": \"the-oculus-draconis.md\"}"
     },
     {
       "prompt": "Publish the oculus draconis to canon",
-      "call": "{\"action\": \"publish\", \"file\": \"the-oculus-draconis.txt\"}"
+      "call": "{\"action\": \"publish\", \"file\": \"the-oculus-draconis.md\"}"
     },
     {
       "prompt": "Retract the oculus draconis from canon",
-      "call": "{\"action\": \"retract\", \"file\": \"the-oculus-draconis.txt\"}"
+      "call": "{\"action\": \"retract\", \"file\": \"the-oculus-draconis.md\"}"
     },
     {
       "prompt": "What's waiting in pending?",
       "call": "{\"action\": \"list\"}"
     },
     {
+      "prompt": "Recall the song The Crystal Caves",
+      "call": "{\"action\": \"recall\", \"file\": \"song The Crystal Caves\"}"
+    },
+    {
       "prompt": "Show me the pronunciation guide draft",
-      "call": "{\"action\": \"read\", \"file\": \"nazili_pronunciation_guide.txt\"}"
+      "call": "{\"action\": \"read\", \"file\": \"nazili_pronunciation_guide.md\"}"
     }
   ],
   "entrypoint": {
@@ -56,8 +89,18 @@
     "params": {
       "action": {
         "type": "string",
-        "enum": ["draft", "revise", "promote", "publish", "retract", "list", "read"],
-        "description": "draft = create a new draft file; revise = replace the text of an existing draft or pending file; promote = move a file from drafts to pending (only); publish = move a file from pending into canon, making it authoritative, then sync it (only when the user says publish); retract = take a published manuscript out of the workspace (only when the user says retract); list = show files at every stage; read = return a file's text. Call promote or publish once per user request."
+        "enum": [
+          "draft",
+          "revise",
+          "edit",
+          "promote",
+          "publish",
+          "retract",
+          "list",
+          "read",
+          "recall"
+        ],
+        "description": "draft = create a new draft file; revise = replace the text of an existing draft or pending file; edit = open a file in Obsidian for the user to edit (changes nothing); promote = move a file from drafts to pending (only); publish = move a file from pending into canon, making it authoritative, then sync it (only when the user says publish); retract = take a published manuscript out of the workspace (only when the user says retract); list = show files at every stage; read = return a file's text from drafts, pending or canon; recall = return the full text of a published canon entry (song, annotation, fragment, album, collection, heading, section, manuscript) by its title or document name, or list every title of a type when given just the type. Call promote or publish once per user request."
       },
       "title": {
         "type": "string",
@@ -65,11 +108,15 @@
       },
       "text": {
         "type": "string",
-        "description": "The full text to save, word for word (actions draft and revise). Do not summarize."
+        "description": "The full text to save, word for word (actions draft and revise). Leave it out when the user refers to text already in the chat (this, the above, your editorializing, include the edits): the skill then saves your previous reply itself."
       },
       "file": {
         "type": "string",
-        "description": "File name such as the-oculus-draconis.txt (actions revise, promote, publish, retract, read). Use list to find names."
+        "description": "File name such as the-oculus-draconis.md (.md, or .txt for older files) (actions revise, edit, promote, publish, retract, read). Use list to find names. For recall: the canon entry's title or document name exactly as the user gave it, including any leading type word."
+      },
+      "use_last_reply": {
+        "type": "boolean",
+        "description": "draft/revise: true to save your previous reply from this chat instead of passing text. Use it whenever the user asks to draft or save something written earlier in the conversation."
       }
     }
   },
