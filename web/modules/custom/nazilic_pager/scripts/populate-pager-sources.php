@@ -17,6 +17,23 @@
 
 use Drupal\nazilic_pager\PagerSequence;
 
+// Only run from the command line (drush php:script). If a web server ever
+// executes this file directly, refuse before touching anything.
+if (PHP_SAPI !== 'cli') {
+  http_response_code(403);
+  exit;
+}
+
+if (!class_exists('Drupal') || !\Drupal::hasContainer()) {
+  fwrite(STDERR, "Run this through Drush: drush php:script " . __FILE__ . "\n");
+  return;
+}
+
+if (!\Drupal::moduleHandler()->moduleExists('nazilic_pager')) {
+  fwrite(STDERR, "The nazilic_pager module is not enabled. Run `drush config:import` (or `drush pm:enable nazilic_pager`) first.\n");
+  return;
+}
+
 // Cross-collection or random displays: never a sensible order for one
 // collection.
 $skip = ['taxonomy_term:block_3', 'taxonomy_term:block_6'];
