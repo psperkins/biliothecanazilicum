@@ -977,7 +977,7 @@ third_party_settings:
               component_attributes:
                 block_attributes:
                   id: ''
-                  class: ''
+                  class: pe-3
                   style: ''
                   data: ''
                 block_title_attributes:

@@ -1,0 +1,38 @@
+uuid: c476d350-dafc-4947-9656-58bade22e4a9
+langcode: en
+status: true
+dependencies:
+  module:
+    - nazilic_pager
+    - taxonomy
+  theme:
+    - MysticTapeDeck
+id: mystictapedeck_nazilic_pager_albums
+theme: MysticTapeDeck
+region: header
+weight: 1
+provider: null
+plugin: nazilic_pager
+settings:
+  id: nazilic_pager
+  label: 'Album pager'
+  label_display: '0'
+  provider: nazilic_pager
+  source: fixed
+  reference_field: field_collection
+  view_display: 'albums_by_year:pager_source'
+  argument: ''
+  previous_label: Prev
+  next_label: Next
+  previous_class: btn-info
+  next_class: btn-primary
+  ends: disable
+  show_titles: false
+visibility:
+  'entity_bundle:taxonomy_term':
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    context_mapping:
+      taxonomy_term: '@taxonomy_term.taxonomy_term_route_context:taxonomy_term'
+    bundles:
+      vessel: vessel

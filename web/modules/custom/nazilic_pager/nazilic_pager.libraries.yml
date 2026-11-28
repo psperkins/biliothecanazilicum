@@ -1,0 +1,5 @@
+pager:
+  version: VERSION
+  css:
+    component:
+      css/nazilic-pager.css: {}

@@ -1,0 +1,10 @@
+name: 'Nazilic Pager'
+type: module
+description: 'Provides a previous/next pager block whose order comes from a chosen view display.'
+package: Custom
+core_version_requirement: ^11.1
+dependencies:
+  - drupal:node
+  - drupal:options
+  - drupal:taxonomy
+  - drupal:views

@@ -1,0 +1,5 @@
+services:
+  nazilic_pager.sequence:
+    class: Drupal\nazilic_pager\PagerSequence
+    arguments: ['@entity_type.manager', '@views.executable']
+  Drupal\nazilic_pager\PagerSequence: '@nazilic_pager.sequence'

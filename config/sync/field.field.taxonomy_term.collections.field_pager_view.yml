@@ -1,0 +1,21 @@
+uuid: eecaff43-ff80-42ba-85f6-ec04c04592f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_pager_view
+    - taxonomy.vocabulary.collections
+  module:
+    - options
+id: taxonomy_term.collections.field_pager_view
+field_name: field_pager_view
+entity_type: taxonomy_term
+bundle: collections
+label: 'Pager view'
+description: 'View displays that set the previous/next order for items in this collection. The first display that contains the item being viewed is used, so list text and audio displays separately if the collection has both.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

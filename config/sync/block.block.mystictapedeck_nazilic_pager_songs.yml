@@ -1,0 +1,38 @@
+uuid: 3704b3a3-d4fa-4ed0-abff-981da69a94dd
+langcode: en
+status: true
+dependencies:
+  module:
+    - nazilic_pager
+    - node
+  theme:
+    - MysticTapeDeck
+id: mystictapedeck_nazilic_pager_songs
+theme: MysticTapeDeck
+region: header
+weight: 0
+provider: null
+plugin: nazilic_pager
+settings:
+  id: nazilic_pager
+  label: 'Song pager'
+  label_display: '0'
+  provider: nazilic_pager
+  source: fixed
+  reference_field: field_collection
+  view_display: 'songs_by_vessel:block_1'
+  argument: field_vessel
+  previous_label: Prev
+  next_label: Next
+  previous_class: btn-info
+  next_class: btn-primary
+  ends: disable
+  show_titles: false
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      songs: songs
