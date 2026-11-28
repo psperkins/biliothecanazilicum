@@ -1,0 +1,24 @@
+uuid: bc39dba8-2d78-46d6-a55e-1a61079042aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+  enforced:
+    module:
+      - nazilic_pager
+id: taxonomy_term.field_pager_view
+field_name: field_pager_view
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values: {  }
+  allowed_values_function: 'Drupal\nazilic_pager\PagerSequence::allowedValues'
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

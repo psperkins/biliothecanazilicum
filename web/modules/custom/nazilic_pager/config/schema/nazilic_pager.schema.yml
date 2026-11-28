@@ -1,0 +1,34 @@
+block.settings.nazilic_pager:
+  type: block_settings
+  label: 'Nazilic pager block settings'
+  mapping:
+    source:
+      type: string
+      label: 'Ordering source'
+    reference_field:
+      type: string
+      label: 'Term reference field'
+    view_display:
+      type: string
+      label: 'View display'
+    argument:
+      type: string
+      label: 'Contextual filter argument'
+    previous_label:
+      type: label
+      label: 'Previous label'
+    next_label:
+      type: label
+      label: 'Next label'
+    previous_class:
+      type: string
+      label: 'Previous button classes'
+    next_class:
+      type: string
+      label: 'Next button classes'
+    ends:
+      type: string
+      label: 'Behaviour at the first and last item'
+    show_titles:
+      type: boolean
+      label: 'Show titles on buttons'

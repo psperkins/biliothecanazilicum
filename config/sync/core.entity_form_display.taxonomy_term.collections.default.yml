@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.taxonomy_term.collections.field_image
     - field.field.taxonomy_term.collections.field_library_location
+    - field.field.taxonomy_term.collections.field_pager_view
     - field.field.taxonomy_term.collections.layout_builder__layout
     - taxonomy.vocabulary.collections
   module:
@@ -34,6 +35,12 @@ content:
   field_library_location:
     type: options_buttons
     weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_pager_view:
+    type: options_select
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }

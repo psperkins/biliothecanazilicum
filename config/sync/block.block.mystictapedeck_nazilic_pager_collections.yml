@@ -1,0 +1,39 @@
+uuid: 40603b98-5deb-4d24-b09f-382a5a326280
+langcode: en
+status: true
+dependencies:
+  module:
+    - nazilic_pager
+    - node
+  theme:
+    - MysticTapeDeck
+id: mystictapedeck_nazilic_pager_collections
+theme: MysticTapeDeck
+region: header
+weight: -1
+provider: null
+plugin: nazilic_pager
+settings:
+  id: nazilic_pager
+  label: 'Collection pager'
+  label_display: '0'
+  provider: nazilic_pager
+  source: term_field
+  reference_field: field_collection
+  view_display: ''
+  argument: ''
+  previous_label: Prev
+  next_label: Next
+  previous_class: btn-info
+  next_class: btn-primary
+  ends: disable
+  show_titles: false
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      text_fragments: text_fragments
+      audio_fragments: audio_fragments

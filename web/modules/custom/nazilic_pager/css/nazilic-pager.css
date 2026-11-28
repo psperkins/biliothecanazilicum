@@ -1,0 +1,13 @@
+/**
+ * Nazilic pager.
+ *
+ * Bootstrap dims disabled buttons to 0.65 opacity; dim the inactive pager
+ * button further so it reads clearly as unavailable.
+ *
+ * Bootstrap declares --bs-btn-disabled-opacity on .btn itself, so the
+ * variable has to be set on the button (not inherited from the nav), with a
+ * selector more specific than .btn.
+ */
+.nazilic-pager .btn {
+  --bs-btn-disabled-opacity: 0.3;
+}

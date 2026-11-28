@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Previous/next pager buttons for a single entity page (Bootstrap 5).
+ *
+ * Available variables:
+ * - previous / next: NULL at either end of the sequence, otherwise an object
+ *   with:
+ *   - url: The entity URL.
+ *   - title: The entity label.
+ * - previous_label / next_label: Button text, for example "Prev" and "Next".
+ * - previous_class / next_class: Classes added after "btn", for example
+ *   "btn-info" and "btn-primary".
+ * - ends: "disable" to show a missing button as disabled, "hide" to leave it
+ *   out.
+ * - show_titles: Whether to print the neighbouring titles on the buttons.
+ *   When off they are used as a tooltip.
+ * - position: 1-based position of the current entity in the sequence.
+ * - total: Number of entities in the sequence.
+ */
+#}
+{% set buttons = [
+  { direction: 'previous', link: previous, label: previous_label, class: previous_class, rel: 'prev' },
+  { direction: 'next', link: next, label: next_label, class: next_class, rel: 'next' },
+] %}
+{# mx-3 gives each button 1rem either side, so 2rem between them. #}
+<nav class="nazilic-pager d-flex align-items-center my-4" aria-label="{{ 'Previous and next'|t }}">
+  {% for button in buttons %}
+    {% set classes = 'btn mx-3 ' ~ button.class ~ ' nazilic-pager__' ~ button.direction %}
+    {% if button.link %}
+      <a href="{{ button.link.url }}" rel="{{ button.rel }}" class="{{ classes }}"{% if not show_titles %} title="{{ button.link.title }}"{% endif %}>
+        {{ button.label }}{% if show_titles %}: {{ button.link.title }}{% endif %}
+      </a>
+    {% elseif ends != 'hide' %}
+      <span class="{{ classes }} disabled" aria-disabled="true">{{ button.label }}</span>
+    {% endif %}
+  {% endfor %}
+</nav>
